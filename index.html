@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskLink - احجز موعدك بسهولة</title>
+    <title>TaskLink - Book Your Appointment Easily</title>
     <style>
         * {
             margin: 0;
@@ -13,151 +13,143 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
-            color: #fff;
+            color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Language Switcher */
+        /* ===== LANGUAGE SWITCHER ===== */
         .lang-switch {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 10px 20px;
+            border-radius: 50px;
             display: flex;
             gap: 10px;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .lang-btn {
             background: none;
             border: none;
-            color: #fff;
+            color: #ffffff;
             cursor: pointer;
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: 30px;
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .lang-btn.active {
-            background: #fff;
-            color: #667eea;
+            background: #00a8ff;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
         }
 
         .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
-            border-radius: 50%;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
-            border-radius: 50%;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Logo */
+        /* ===== LOGO ===== */
         .logo {
-            font-size: 48px;
-            font-weight: 800;
+            font-size: 42px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-top: 40px;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 1s ease;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
         }
 
         .logo span {
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 60px;
+            color: #00a8ff;
         }
 
-        /* Headline */
+        /* ===== HERO SECTION ===== */
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .headline {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 800;
+            line-height: 1.3;
             margin-bottom: 20px;
-            line-height: 1.4;
+            text-shadow: 0 0 30px rgba(0, 168, 255, 0.5);
             animation: fadeInUp 1s ease;
         }
 
         .subheadline {
             font-size: 20px;
             opacity: 0.9;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
             line-height: 1.8;
+            margin-bottom: 40px;
             animation: fadeInUp 1.2s ease;
         }
 
-        /* Features */
+        /* ===== CTA BUTTON ===== */
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
+            color: #ffffff;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.5), 0 0 40px rgba(0, 168, 255, 0.2);
+            animation: pulse 2s infinite;
+            margin-bottom: 50px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.7), 0 0 60px rgba(0, 168, 255, 0.4);
+        }
+
+        /* ===== FEATURES ===== */
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
             animation: fadeInUp 1.5s ease;
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
             padding: 30px;
             border-radius: 20px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #00a8ff;
+            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
         }
 
         .feature-icon {
-            font-size: 48px;
+            font-size: 50px;
             margin-bottom: 15px;
         }
 
@@ -170,116 +162,22 @@
         .feature-desc {
             font-size: 14px;
             opacity: 0.9;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* CTA Button */
-        .cta-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            color: #333;
-            padding: 20px 40px;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
-            animation: pulse 2s infinite;
-            margin-bottom: 30px;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
-        }
-
-        /* Form Section */
-        .form-section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 30px;
-            margin-top: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .form-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #ffd93d;
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            color: #333;
-            padding: 20px;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
-        }
-
-        /* Stats Section */
+        /* ===== STATS ===== */
         .stats-section {
-            margin-top: 80px;
+            max-width: 900px;
+            margin: 0 auto 60px;
             padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: rgba(0, 168, 255, 0.1);
+            backdrop-filter: blur(12px);
             border-radius: 30px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 30px;
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            animation: fadeInUp 1.8s ease;
         }
 
         .stat-item {
@@ -288,10 +186,9 @@
 
         .stat-number {
             font-size: 48px;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            color: #00a8ff;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
         }
 
         .stat-label {
@@ -300,61 +197,17 @@
             margin-top: 10px;
         }
 
-        /* Footer */
+        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
-            padding: 40px;
-            margin-top: 80px;
-            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 30px 30px 0 0;
-        }
-
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-btn:hover {
-            background: #fff;
-            transform: translateY(-5px);
-        }
-
-        .social-btn i {
-            font-size: 20px;
-            color: #667eea;
-        }
-
-        .footer-text {
             font-size: 14px;
             opacity: 0.8;
         }
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -375,10 +228,10 @@
             }
         }
 
-        /* Mobile Responsive */
+        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
             .headline {
-                font-size: 28px;
+                font-size: 32px;
             }
 
             .subheadline {
@@ -390,246 +243,147 @@
             }
 
             .logo {
-                font-size: 36px;
+                font-size: 32px;
             }
 
-            .logo span {
-                font-size: 45px;
-            }
-
-            .form-section {
+            .stats-section {
                 padding: 20px;
             }
         }
 
-        /* English Version Styles */
-        html[lang="en"] {
-            direction: ltr;
-        }
-
-        html[lang="en"] .lang-switch {
-            right: auto;
-            left: 20px;
-        }
-
-        /* Hidden elements for language switching */
+        /* ===== LANGUAGE SWITCHING ===== */
         .ar-only {
-            display: block;
+            display: none;
         }
 
         .en-only {
-            display: none;
-        }
-
-        html[lang="en"] .ar-only {
-            display: none;
-        }
-
-        html[lang="en"] .en-only {
             display: block;
+        }
+
+        html[lang="ar"] .ar-only {
+            display: block;
+        }
+
+        html[lang="ar"] .en-only {
+            display: none;
+        }
+
+        html[lang="ar"] {
+            direction: rtl;
+        }
+
+        html[lang="ar"] .lang-switch {
+            right: auto;
+            left: 20px;
         }
     </style>
 </head>
 <body>
     <!-- Language Switcher -->
     <div class="lang-switch">
-        <button class="lang-btn active" onclick="switchLang('ar')">العربية</button>
-        <button class="lang-btn" onclick="switchLang('en')">English</button>
+        <button class="lang-btn active" onclick="switchLang('en')">English</button>
+        <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo">
+        <span>🔗</span> TaskLink
     </div>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <!-- Logo -->
-            <div class="logo ar-only">
-                <span>🔗</span> TaskLink
-            </div>
-            <div class="logo en-only">
-                <span>🔗</span> TaskLink
-            </div>
+        <h1 class="headline en-only">
+            Book Your Appointment<br>Easily & Professionally
+        </h1>
+        <h1 class="headline ar-only">
+            احجز موعدك<br>بسهولة واحترافية
+        </h1>
 
-            <!-- Headline -->
-            <h1 class="headline ar-only">
-                اربط نفسك بعملائك<br>بسهولة واحترافية
-            </h1>
-            <h1 class="headline en-only">
-                Connect with your clients<br>Easily & Professionally
-            </h1>
+        <p class="subheadline en-only">
+            The first platform that connects small professionals with clients directly,<br>
+            without phone calls or waiting for WhatsApp replies
+        </p>
+        <p class="subheadline ar-only">
+            المنصة الأولى التي تربط المهنيين الصغار بالزبائن مباشرة،<br>
+            بدون حاجة للاتصالات الهاتفية أو انتظار الرد على واتساب
+        </p>
 
-            <!-- Subheadline -->
-            <p class="subheadline ar-only">
-                المنصة الأولى التي تربط المهنيين الصغار بالزبائن مباشرة،<br>
-                بدون حاجة للاتصالات الهاتفية أو انتظار الرد على واتساب
-            </p>
-            <p class="subheadline en-only">
-                The first platform that connects small professionals with clients directly,<br>
-                without phone calls or waiting for WhatsApp replies
-            </p>
+        <button class="cta-btn" onclick="goToRegister()">
+            <span class="en-only">🚀 Register Now for Free</span>
+            <span class="ar-only">🚀 سجل الآن مجاناً</span>
+        </button>
+    </section>
 
-            <!-- CTA Button -->
-            <a href="#register" class="cta-btn ar-only">
-                🚀 سجل الآن مجاناً
-            </a>
-            <a href="#register" class="cta-btn en-only">
-                🚀 Register Now for Free
-            </a>
+    <!-- Features -->
+    <section class="features">
+        <div class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3 class="feature-title en-only">Online Booking</h3>
+            <h3 class="feature-title ar-only">حجز أونلاين</h3>
+            <p class="feature-desc en-only">Clients book appointments directly through the platform without any calls</p>
+            <p class="feature-desc ar-only">الزبائن يحجزون مواعيدهم مباشرة عبر المنصة بدون أي اتصال</p>
+        </div>
 
-            <!-- Features -->
-            <div class="features">
-                <div class="feature-card">
-                    <div class="feature-icon">📅</div>
-                    <h3 class="feature-title ar-only">حجز أونلاين</h3>
-                    <h3 class="feature-title en-only">Online Booking</h3>
-                    <p class="feature-desc ar-only">الزبائن يحجزون مواعيدهم مباشرة عبر المنصة بدون أي اتصال</p>
-                    <p class="feature-desc en-only">Clients book their appointments directly through the platform without any calls</p>
-                </div>
+        <div class="feature-card">
+            <div class="feature-icon">⏰</div>
+            <h3 class="feature-title en-only">Save Time</h3>
+            <h3 class="feature-title ar-only">توفير الوقت</h3>
+            <p class="feature-desc en-only">No more repetitive messages, focus on your work and let us handle bookings</p>
+            <p class="feature-desc ar-only">وداعاً للرسائل المتكررة، ركز على عملك واترك الحجز لنا</p>
+        </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">⏰</div>
-                    <h3 class="feature-title ar-only">توفير الوقت</h3>
-                    <h3 class="feature-title en-only">Save Time</h3>
-                    <p class="feature-desc ar-only">وداعاً للرسائل المتكررة، ركز على عملك واترك الحجز لنا</p>
-                    <p class="feature-desc en-only">No more repetitive messages, focus on your work and let us handle bookings</p>
-                </div>
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title en-only">Better Organization</h3>
+            <h3 class="feature-title ar-only">تنظيم أفضل</h3>
+            <p class="feature-desc en-only">Full control over your schedule and appointments from one place</p>
+            <p class="feature-desc ar-only">تحكم كامل في أوقاتك ومواعيدك من مكان واحد</p>
+        </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title ar-only">تنظيم أفضل</h3>
-                    <h3 class="feature-title en-only">Better Organization</h3>
-                    <p class="feature-desc ar-only">تحكم كامل في أوقاتك ومواعيدك من مكان واحد</p>
-                    <p class="feature-desc en-only">Full control over your schedule and appointments from one place</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3 class="feature-title ar-only">زيادة الأرباح</h3>
-                    <h3 class="feature-title en-only">Increase Revenue</h3>
-                    <p class="feature-desc ar-only">قلل من الإلغاءات وزد من عدد عملائك المستمرين</p>
-                    <p class="feature-desc en-only">Reduce cancellations and increase your recurring clients</p>
-                </div>
-            </div>
-
-            <!-- Stats Section -->
-            <div class="stats-section">
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label ar-only">مجاني لمدة 3 أشهر</div>
-                    <div class="stat-label en-only">Free for 3 Months</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-number">20</div>
-                    <div class="stat-label ar-only">مهني أولي</div>
-                    <div class="stat-label en-only">Early Professionals</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-number">30s</div>
-                    <div class="stat-label ar-only">لإتمام الحجز</div>
-                    <div class="stat-label en-only">to Complete Booking</div>
-                </div>
-
-                <div class="stat-item">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label ar-only">خدمة مستمرة</div>
-                    <div class="stat-label en-only">Continuous Service</div>
-                </div>
-            </div>
-
-            <!-- Registration Form -->
-            <div class="form-section" id="register">
-                <h2 class="form-title ar-only">📝 انضم الآن كأول مهني</h2>
-                <h2 class="form-title en-only">📝 Join Now as Early Professional</h2>
-
-                <form onsubmit="submitForm(event)">
-                    <div class="form-group">
-                        <label class="ar-only">الاسم الكامل *</label>
-                        <label class="en-only">Full Name *</label>
-                        <input type="text" id="name" required class="ar-only" placeholder="أدخل اسمك الكامل">
-                        <input type="text" id="name_en" required class="en-only" placeholder="Enter your full name">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="ar-only">المهنة *</label>
-                        <label class="en-only">Profession *</label>
-                        <select id="profession" required class="ar-only">
-                            <option value="">اختر مهنتك</option>
-                            <option value="coach">كوتش رياضي</option>
-                            <option value="hairdresser">مصفف شعر</option>
-                            <option value="dentist">طبيب أسنان</option>
-                            <option value="tutor">أستاذ دروس خصوصية</option>
-                            <option value="photographer">مصور فوتوغرافي</option>
-                            <option value="trainer">مدرب لياقة</option>
-                            <option value="other">أخرى</option>
-                        </select>
-                        <select id="profession_en" required class="en-only">
-                            <option value="">Select your profession</option>
-                            <option value="coach">Sports Coach</option>
-                            <option value="hairdresser">Hairdresser</option>
-                            <option value="dentist">Dentist</option>
-                            <option value="tutor">Private Tutor</option>
-                            <option value="photographer">Photographer</option>
-                            <option value="trainer">Fitness Trainer</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="ar-only">المدينة *</label>
-                        <label class="en-only">City *</label>
-                        <input type="text" id="city" required class="ar-only" placeholder="أدخل مدينتك">
-                        <input type="text" id="city_en" required class="en-only" placeholder="Enter your city">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="ar-only">رقم الهاتف *</label>
-                        <label class="en-only">Phone Number *</label>
-                        <input type="tel" id="phone" required class="ar-only" placeholder="أدخل رقم هاتفك">
-                        <input type="tel" id="phone_en" required class="en-only" placeholder="Enter your phone number">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="ar-only">البريد الإلكتروني</label>
-                        <label class="en-only">Email</label>
-                        <input type="email" id="email" class="ar-only" placeholder="أدخل بريدك الإلكتروني">
-                        <input type="email" id="email_en" class="en-only" placeholder="Enter your email">
-                    </div>
-
-                    <button type="submit" class="submit-btn ar-only">
-                        ✅ سجل الآن - 3 أشهر مجاناً
-                    </button>
-                    <button type="submit" class="submit-btn en-only">
-                        ✅ Register Now - 3 Months Free
-                    </button>
-                </form>
-            </div>
-
-            <!-- Footer -->
-            <div class="footer">
-                <div class="footer-social">
-                    <a href="#" class="social-btn">
-                        <i>📘</i>
-                    </a>
-                    <a href="#" class="social-btn">
-                        <i>📸</i>
-         </a>
-                    <a href="#" class="social-btn">
-                        <i>💼</i>
-                    </a>
-                </div>
-
-                <p class="footer-text ar-only">
-                    © 2024 TaskLink - جميع الحقوق محفوظة | صُنع بحب في الجزائر 🇩🇿
-                </p>
-                <p class="footer-text en-only">
-                    © 2024 TaskLink - All Rights Reserved | Made with love in Algeria 🇩🇿
-                </p>
-            </div>
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3 class="feature-title en-only">Increase Revenue</h3>
+            <h3 class="feature-title ar-only">زيادة الأرباح</h3>
+            <p class="feature-desc en-only">Reduce cancellations and increase your recurring clients</p>
+            <p class="feature-desc ar-only">قلل من الإلغاءات وزد من عدد عملائك المستمرين</p>
         </div>
     </section>
 
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div class="stat-label en-only">Free for 3 Months</div>
+            <div class="stat-label ar-only">مجاني لمدة 3 أشهر</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-number">20</div>
+            <div class="stat-label en-only">Early Professionals</div>
+            <div class="stat-label ar-only">مهني أولي</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-number">30s</div>
+            <div class="stat-label en-only">to Complete Booking</div>
+            <div class="stat-label ar-only">لإتمام الحجز</div>
+        </div>
+
+        <div class="stat-item">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label en-only">Continuous Service</div>
+            <div class="stat-label ar-only">خدمة مستمرة</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
+        <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
+    </div>
+
     <script>
-        // Language switching function
+        // ===== LANGUAGE SWITCHING =====
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');
@@ -637,35 +391,20 @@
             if (lang === 'ar') {
                 html.lang = 'ar';
                 html.dir = 'rtl';
-                buttons[0].classList.add('active');
-                buttons[1].classList.remove('active');
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
             } else {
                 html.lang = 'en';
                 html.dir = 'ltr';
-                buttons[1].classList.add('active');
-                buttons[0].classList.remove('active');
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
             }
         }
 
-        // Form submission handler
-        function submitForm(event) {
-            event.preventDefault();
-
-            const lang = document.documentElement.lang;
-            const name = document.getElementById(lang === 'ar' ? 'name' : 'name_en').value;
-            const profession = document.getElementById(lang === 'ar' ? 'profession' : 'profession_en').value;
-            const city = document.getElementById(lang === 'ar' ? 'city' : 'city_en').value;
-            const phone = document.getElementById(lang === 'ar' ? 'phone' : 'phone_en').value;
-            const email = document.getElementById(lang === 'ar' ? 'email' : 'email_en').value;
-
-            // Prepare email content
-            const subject = lang === 'ar' ? 'تسجيل مهني جديد - TaskLink' : 'New Professional Registration - TaskLink';
-            const body = lang === 'ar' 
-                ? `معلومات التسجيل:\n\nالاسم: ${name}\nالمهنة: ${profession}\nالمدينة: ${city}\nالهاتف: ${phone}\nالبريد: ${email}`
-                : `Registration Information:\n\nName: ${name}\nProfession: ${profession}\nCity: ${city}\nPhone: ${phone}\nEmail: ${email}`;
-
-            // Open email client
-            window.location.href = `mailto:louaithelion@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // ===== NAVIGATION TO REGISTRATION PAGE =====
+        function goToRegister() {
+            // Show registration section (for future use)
+            alert('You will be redirected to the registration page soon!');
         }
     </script>
 </body>

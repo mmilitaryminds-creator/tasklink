@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskLink - Register as Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 2000;
+        }
+
+        /* ===== LOGO ===== */
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+        }
+
+        .logo span {
+            color: #00a8ff;
+        }
+
+        /* ===== LANGUAGE SWITCHER ===== */
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #00a8ff;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== RETURN BUTTON ===== */
+        .return-btn {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .return-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== FORM SECTION ===== */
+        .form-section {
+            max-width: 600px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+
+        .form-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+        }
+
+        .form-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* ===== FORM FIELDS ===== */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #00a8ff;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
+            color: #ffffff;
+            padding: 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.5), 0 0 40px rgba(0, 168, 255, 0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.7), 0 0 60px rgba(0, 168, 255, 0.4);
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            display: none;
+            background: rgba(46, 213, 115, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px 30px 0 0;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .form-section {
+                padding: 20px;
+                margin: 100px 20px 40px;
+            }
+
+            .form-title {
+                font-size: 24px;
+            }
+        }
+
+        /* ===== LANGUAGE SWITCHING ===== */
+        .ar-only {
+            display: none;
+        }
+
+        .en-only {
+            display: block;
+        }
+
+        html[lang="ar"] .ar-only {
+            display: block;
+        }
+
+        html[lang="ar"] .en-only {
+            display: none;
+        }
+
+        html[lang="ar"] {
+            direction: rtl;
+        }
+
+        html[lang="ar"] .return-btn {
+            direction: ltr;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <!-- Logo (Small, Top Right) -->
+        <div class="logo">
+            <span>🔗</span> TaskLink
+        </div>
+
+        <!-- Return Button -->
+        <a href="index.html" class="return-btn">
+            <span class="en-only">← Back to Home</span>
+            <span class="ar-only">→ العودة للصفحة الرئيسية</span>
+        </a>
+
+        <!-- Language Switcher -->
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="switchLang('en')">English</button>
+            <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <h2 class="form-title en-only">Join Now as Early Professional</h2>
+        <h2 class="form-title ar-only">انضم الآن كأول مهني</h2>
+
+        <p class="form-subtitle en-only">
+            Fill in your information below and start receiving bookings from clients
+        </p>
+        <p class="form-subtitle ar-only">
+            املأ معلوماتك أدناه وابدأ في استقبال الحجوزات من الزبائن
+        </p>
+
+        <form onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label class="en-only">Full Name *</label>
+                <label class="ar-only">الاسم الكامل *</label>
+                <input type="text" id="name" required class="en-only" placeholder="Enter your full name">
+                <input type="text" id="name_ar" required class="ar-only" placeholder="أدخل اسمك الكامل">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Profession *</label>
+                <label class="ar-only">المهنة *</label>
+                <select id="profession" required class="en-only">
+                    <option value="">Select your profession</option>
+                    <option value="coach">Sports Coach</option>
+                    <option value="hairdresser">Hairdresser</option>
+                    <option value="dentist">Dentist</option>
+                    <option value="tutor">Private Tutor</option>
+                    <option value="photographer">Photographer</option>
+                    <option value="trainer">Fitness Trainer</option>
+                    <option value="other">Other</option>
+                </select>
+                <select id="profession_ar" required class="ar-only">
+                    <option value="">اختر مهنتك</option>
+                    <option value="coach">كوتش رياضي</option>
+                    <option value="hairdresser">مصفف شعر</option>
+                    <option value="dentist">طبيب أسنان</option>
+                    <option value="tutor">أستاذ دروس خصوصية</option>
+                    <option value="photographer">مصور فوتوغرافي</option>
+                    <option value="trainer">مدرب لياقة</option>
+                    <option value="other">أخرى</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">City *</label>
+                <label class="ar-only">المدينة *</label>
+                <input type="text" id="city" required class="en-only" placeholder="Enter your city">
+                <input type="text" id="city_ar" required class="ar-only" placeholder="أدخل مدينتك">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Phone Number *</label>
+                <label class="ar-only">رقم الهاتف *</label>
+                <input type="tel" id="phone" required class="en-only" placeholder="Enter your phone number">
+                <input type="tel" id="phone_ar" required class="ar-only" placeholder="أدخل رقم هاتفك">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Email *</label>
+                <label class="ar-only">البريد الإلكتروني *</label>
+                <input type="email" id="email" required class="en-only" placeholder="Enter your email">
+                <input type="email" id="email_ar" required class="ar-only" placeholder="أدخل بريدك الإلكتروني">
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span class="en-only">✅ Register Now - 3 Months Free</span>
+                <span class="ar-only">✅ سجل الآن - 3 أشهر مجاناً</span>
+            </button>
+        </form>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <p class="en-only">🎉 Registration Successful! We'll contact you soon</p>
+            <p class="ar-only">🎉 تم التسجيل بنجاح! سنتواصل معك قريباً</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
+        <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
+  </div>
+      <script>
+        // ===== LANGUAGE SWITCHING =====
+        function switchLang(lang) {
+            const html = document.documentElement;
+            const buttons = document.querySelectorAll('.lang-btn');
+
+            if (lang === 'ar') {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            } else {
+                html.lang = 'en';
+                html.dir = 'ltr';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            }
+        }
+
+        // ===== FORM SUBMISSION =====
+        function submitForm(event) {
+            event.preventDefault();
+
+            const lang = document.documentElement.lang;
+            const name = document.getElementById(lang === 'ar' ? 'name_ar' : 'name').value;
+            const profession = document.getElementById(lang === 'ar' ? 'profession_ar' : 'profession').value;
+            const city = document.getElementById(lang === 'ar' ? 'city_ar' : 'city').value;
+            const phone = document.getElementById(lang === 'ar' ? 'phone_ar' : 'phone').value;
+            const email = document.getElementById(lang === 'ar' ? 'email_ar' : 'email').value;
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+
+            // Prepare email to owner
+            const ownerEmail = 'louaithelion@gmail.com';
+            const subject = lang === 'ar' ? 'تسجيل مهني جديد - TaskLink' : 'New Professional Registration - TaskLink';
+            const body = lang === 'ar'
+                ? `معلومات التسجيل:\n\nالاسم: ${name}\nالمهنة: ${profession}\nالمدينة: ${city}\nالهاتف: ${phone}\nالبريد: ${email}`
+                : `Registration Information:\n\nName: ${name}\nProfession: ${profession}\nCity: ${city}\nPhone: ${phone}\nEmail: ${email}`;
+
+            // Open email client (mailto)
+            window.location.href = `mailto:${ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                document.getElementById('name').value = '';
+                document.getElementById('name_ar').value = '';
+                document.getElementById('profession').value = '';
+                document.getElementById('profession_ar').value = '';
+                document.getElementById('city').value = '';
+                document.getElementById('city_ar').value = '';
+                document.getElementById('phone').value = '';
+                document.getElementById('phone_ar').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('email_ar').value = '';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

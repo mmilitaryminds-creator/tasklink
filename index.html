@@ -1,294 +1,672 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="html-root">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TaskLink</title>
-<style>
-  :root{
-    --bg:#FAF9F5;
-    --card:#FFFFFF;
-    --ink:#1C2321;
-    --ink-soft:#5A6660;
-    --ochre:#C97A2B;
-    --ochre-dark:#A9611E;
-    --teal:#2D5A4A;
-    --teal-soft:#E4EEE9;
-    --line:#E4E1D8;
-  }
-  *{ box-sizing:border-box; }
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Segoe UI',system-ui,-apple-system,Tahoma,sans-serif;
-    line-height:1.6;
-  }
-  .wrap{ max-width:480px; margin:0 auto; padding:0 18px 60px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskLink - احجز موعدك بسهولة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  /* top bar */
-  .topbar{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:18px 0 10px;
-  }
-  .brand{ font-size:19px; font-weight:800; letter-spacing:.2px; }
-  .brand span{ color:var(--ochre); }
-  .lang-toggle{
-    display:flex; border:1.5px solid var(--line); border-radius:20px; overflow:hidden;
-  }
-  .lang-toggle button{
-    border:none; background:var(--card); padding:6px 14px; font-size:12.5px;
-    font-weight:700; cursor:pointer; color:var(--ink-soft);
-  }
-  .lang-toggle button.active{ background:var(--teal); color:#fff; }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-  /* hero */
-  .hero{ padding:24px 0 10px; text-align:center; }
-  .hero h1{
-    font-size:26px; line-height:1.35; margin:0 0 12px; font-weight:800;
-  }
-  .hero p{ color:var(--ink-soft); font-size:15px; margin:0 0 22px; }
-  .cta-primary{
-    display:inline-block; background:var(--ochre); color:#fff; text-decoration:none;
-    font-weight:700; font-size:15px; padding:13px 28px; border-radius:30px;
-    box-shadow:0 6px 16px rgba(201,122,43,.28);
-    border:none; cursor:pointer;
-  }
+        /* Language Switcher */
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
 
-  /* problem */
-  .card{
-    background:var(--card); border:1.5px solid var(--line); border-radius:14px;
-    padding:18px; margin:14px 0;
-  }
-  .problem-line{
-    display:flex; gap:10px; align-items:flex-start; margin-bottom:10px; font-size:14.5px;
-  }
-  .problem-line:last-child{ margin-bottom:0; }
-  .problem-line .dot{
-    width:7px; height:7px; border-radius:50%; background:var(--ochre); margin-top:8px; flex-shrink:0;
-  }
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-  /* how it works */
-  .section-title{ font-size:19px; font-weight:800; margin:30px 0 14px; }
-  .step{
-    display:flex; gap:14px; align-items:flex-start; margin-bottom:16px;
-  }
-  .step-num{
-    width:30px; height:30px; border-radius:50%; background:var(--teal-soft); color:var(--teal);
-    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px;
-    flex-shrink:0; font-family:'Courier New',monospace;
-  }
-  .step-text b{ display:block; font-size:15px; margin-bottom:2px; }
-  .step-text span{ font-size:13.5px; color:var(--ink-soft); }
+        .lang-btn.active {
+            background: #fff;
+            color: #667eea;
+        }
 
-  /* pricing */
-  .price-card{
-    background:var(--teal); color:#fff; border-radius:16px; padding:22px; text-align:center;
-    margin:16px 0;
-  }
-  .price-card .badge{
-    display:inline-block; background:rgba(255,255,255,.15); font-size:11.5px; font-weight:700;
-    padding:4px 12px; border-radius:20px; margin-bottom:10px;
-  }
-  .price-card .amount{ font-size:15px; opacity:.92; margin:6px 0 4px; }
-  .price-card .note{ font-size:12.5px; opacity:.75; }
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
 
-  /* form */
-  .form-section{ margin-top:6px; }
-  .form-row{ margin-bottom:12px; }
-  .form-row label{ display:block; font-size:13px; font-weight:700; margin-bottom:5px; color:var(--ink-soft); }
-  .form-row input, .form-row select{
-    width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:8px;
-    font-size:14.5px; font-family:inherit; background:#fff; color:var(--ink);
-  }
-  .form-row input:focus, .form-row select:focus{ outline:2px solid var(--teal); outline-offset:1px; }
-  .btn-submit{
-    width:100%; background:var(--ochre); color:#fff; border:none; border-radius:8px;
-    padding:14px; font-size:15.5px; font-weight:700; cursor:pointer; margin-top:6px;
-  }
-  .btn-submit:active{ background:var(--ochre-dark); }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-  .footer-note{ text-align:center; font-size:12.5px; color:var(--ink-soft); margin-top:20px; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
 
-  .thankyou{
-    display:none; text-align:center; padding:30px 14px;
-  }
-  .thankyou.show{ display:block; }
-  .thankyou .check{
-    width:52px; height:52px; border-radius:50%; background:var(--teal-soft); color:var(--teal);
-    display:flex; align-items:center; justify-content:center; margin:0 auto 14px; font-size:26px;
-  }
-  .thankyou h2{ margin:0 0 8px; font-size:19px; }
-  .thankyou p{ color:var(--ink-soft); font-size:14px; }
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+        }
 
-  [data-lang="en"] body{ direction:ltr; }
-</style>
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Logo */
+        .logo {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .logo span {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 60px;
+        }
+
+        /* Headline */
+        .headline {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            animation: fadeInUp 1s ease;
+        }
+
+        .subheadline {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: #333;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 30px;
+            margin-top: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #ffd93d;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: #333;
+            padding: 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            margin-top: 80px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            margin-top: 80px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: #fff;
+            transform: translateY(-5px);
+        }
+
+        .social-btn i {
+            font-size: 20px;
+            color: #667eea;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 28px;
+            }
+
+            .subheadline {
+                font-size: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 36px;
+            }
+
+            .logo span {
+                font-size: 45px;
+            }
+
+            .form-section {
+                padding: 20px;
+            }
+        }
+
+        /* English Version Styles */
+        html[lang="en"] {
+            direction: ltr;
+        }
+
+        html[lang="en"] .lang-switch {
+            right: auto;
+            left: 20px;
+        }
+
+        /* Hidden elements for language switching */
+        .ar-only {
+            display: block;
+        }
+
+        .en-only {
+            display: none;
+        }
+
+        html[lang="en"] .ar-only {
+            display: none;
+        }
+
+        html[lang="en"] .en-only {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-
-<div class="wrap">
-
-  <div class="topbar">
-    <div class="brand">TaskLink<span>.</span></div>
-    <div class="lang-toggle">
-      <button id="btn-ar" class="active" onclick="setLang('ar')">ع</button>
-      <button id="btn-en" onclick="setLang('en')">EN</button>
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="switchLang('ar')">العربية</button>
+        <button class="lang-btn" onclick="switchLang('en')">English</button>
     </div>
-  </div>
 
-  <div class="hero">
-    <h1 data-ar="خلّي زبائنك يحجزو معاك مباشرة، بلا واتساب، بلا نسيان مواعيد"
-        data-en="Let your clients book with you directly — no WhatsApp back-and-forth, no missed appointments">
-    </h1>
-    <p data-ar="منصة بسيطة تجيب لك حجوزات جديدة وتنظم أوقاتك، مخصصة للمهنيين الصغار فالجزائر"
-       data-en="A simple platform that brings you new bookings and organizes your schedule — built for independent professionals in Algeria">
-    </p>
-    <button class="cta-primary" onclick="scrollToForm()"
-            data-ar="سجل مجاناً كأول مهني" data-en="Join free as a founding professional"></button>
-  </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <!-- Logo -->
+            <div class="logo ar-only">
+                <span>🔗</span> TaskLink
+            </div>
+            <div class="logo en-only">
+                <span>🔗</span> TaskLink
+            </div>
 
-  <div class="card">
-    <div class="problem-line">
-      <div class="dot"></div>
-      <div data-ar="كتضيع وقت تجاوب على رسائل واتساب باش تأكد موعد بسيط"
-           data-en="You waste time replying to WhatsApp messages just to confirm a simple appointment"></div>
-    </div>
-    <div class="problem-line">
-      <div class="dot"></div>
-      <div data-ar="الزبون كينسى الموعد ويجيك غياب بلا تعويض"
-           data-en="Clients forget their appointment and you're left with an empty slot"></div>
-    </div>
-    <div class="problem-line">
-      <div class="dot"></div>
-      <div data-ar="ما عندكش صورة واضحة على أوقاتك المتاحة فاليوم"
-           data-en="You don't have a clear view of your available slots for the day"></div>
-    </div>
-  </div>
+            <!-- Headline -->
+            <h1 class="headline ar-only">
+                اربط نفسك بعملائك<br>بسهولة واحترافية
+            </h1>
+            <h1 class="headline en-only">
+                Connect with your clients<br>Easily & Professionally
+            </h1>
 
-  <div class="section-title" data-ar="كيفاش تخدم" data-en="How it works"></div>
+            <!-- Subheadline -->
+            <p class="subheadline ar-only">
+                المنصة الأولى التي تربط المهنيين الصغار بالزبائن مباشرة،<br>
+                بدون حاجة للاتصالات الهاتفية أو انتظار الرد على واتساب
+            </p>
+            <p class="subheadline en-only">
+                The first platform that connects small professionals with clients directly,<br>
+                without phone calls or waiting for WhatsApp replies
+            </p>
 
-  <div class="step">
-    <div class="step-num">1</div>
-    <div class="step-text">
-      <b data-ar="تسجل بروفايلك" data-en="Create your profile"></b>
-      <span data-ar="اسمك، خدماتك، أسعارك، والأوقات اللي متاح فيها"
-            data-en="Your name, services, prices, and the hours you're available"></span>
-    </div>
-  </div>
-  <div class="step">
-    <div class="step-num">2</div>
-    <div class="step-text">
-      <b data-ar="الزبون يحجز مباشرة" data-en="Clients book directly"></b>
-      <span data-ar="يبحث عليك حسب مدينتك ونوع خدمتك، ويختار وقت فاضي"
-            data-en="They find you by city and service, then pick an open slot"></span>
-    </div>
-  </div>
-  <div class="step">
-    <div class="step-num">3</div>
-    <div class="step-text">
-      <b data-ar="تتأكد وتخدم" data-en="You confirm and get to work"></b>
-      <span data-ar="تجيك إشعار بالحجز، وموعدك يتزاد فالتقويم تاعك مباشرة"
-            data-en="You get notified, and the slot is added straight to your schedule"></span>
-    </div>
-  </div>
+            <!-- CTA Button -->
+            <a href="#register" class="cta-btn ar-only">
+                🚀 سجل الآن مجاناً
+            </a>
+            <a href="#register" class="cta-btn en-only">
+                🚀 Register Now for Free
+            </a>
 
-  <div class="price-card">
-    <div class="badge" data-ar="عرض الانطلاقة" data-en="Launch offer"></div>
-    <div style="font-size:22px;font-weight:800;" data-ar="مجاني لأول 20 مهني"
-         data-en="Free for the first 20 professionals"></div>
-    <div class="amount" data-ar="بعدها: اشتراك شهري بسيط، بلا عمولات مخفية"
-         data-en="After that: a simple monthly subscription, no hidden commissions"></div>
-    <div class="note" data-ar="ما كاين حتى التزام، تقدر توقف فأي وقت"
-         data-en="No commitment — cancel anytime"></div>
-  </div>
+            <!-- Features -->
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3 class="feature-title ar-only">حجز أونلاين</h3>
+                    <h3 class="feature-title en-only">Online Booking</h3>
+                    <p class="feature-desc ar-only">الزبائن يحجزون مواعيدهم مباشرة عبر المنصة بدون أي اتصال</p>
+                    <p class="feature-desc en-only">Clients book their appointments directly through the platform without any calls</p>
+                </div>
 
-  <div id="form-section" class="card form-section">
-    <div class="section-title" style="margin-top:0;" data-ar="سجل مكانك دابا" data-en="Reserve your spot now"></div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏰</div>
+                    <h3 class="feature-title ar-only">توفير الوقت</h3>
+                    <h3 class="feature-title en-only">Save Time</h3>
+                    <p class="feature-desc ar-only">وداعاً للرسائل المتكررة، ركز على عملك واترك الحجز لنا</p>
+                    <p class="feature-desc en-only">No more repetitive messages, focus on your work and let us handle bookings</p>
+                </div>
 
-    <form id="signup-form">
-      <div class="form-row">
-        <label data-ar="الاسم الكامل" data-en="Full name"></label>
-        <input type="text" id="f-name" required>
-      </div>
-      <div class="form-row">
-        <label data-ar="المهنة" data-en="Profession"></label>
-        <input type="text" id="f-profession" placeholder="مثلاً: مدرب رياضي" required>
-      </div>
-      <div class="form-row">
-        <label data-ar="المدينة" data-en="City"></label>
-        <input type="text" id="f-city" required>
-      </div>
-      <div class="form-row">
-        <label data-ar="رقم الهاتف أو واتساب" data-en="Phone / WhatsApp number"></label>
-        <input type="text" id="f-phone" required>
-      </div>
-      <button type="submit" class="btn-submit" data-ar="سجلني" data-en="Sign me up"></button>
-    </form>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title ar-only">تنظيم أفضل</h3>
+                    <h3 class="feature-title en-only">Better Organization</h3>
+                    <p class="feature-desc ar-only">تحكم كامل في أوقاتك ومواعيدك من مكان واحد</p>
+                    <p class="feature-desc en-only">Full control over your schedule and appointments from one place</p>
+                </div>
 
-    <div id="thankyou" class="thankyou">
-      <div class="check">✓</div>
-      <h2 data-ar="تسجلت بنجاح!" data-en="You're in!"></h2>
-      <p data-ar="غادي نتواصلو معاك قريب باش نكملو التفاصيل"
-         data-en="We'll be in touch soon to finalize the details"></p>
-    </div>
-  </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3 class="feature-title ar-only">زيادة الأرباح</h3>
+                    <h3 class="feature-title en-only">Increase Revenue</h3>
+                    <p class="feature-desc ar-only">قلل من الإلغاءات وزد من عدد عملائك المستمرين</p>
+                    <p class="feature-desc en-only">Reduce cancellations and increase your recurring clients</p>
+                </div>
+            </div>
 
-  <p class="footer-note" data-ar="بياناتك تستعمل فقط باش نتواصلو معاك بخصوص المنصة"
-     data-en="Your details are used only to contact you about the platform"></p>
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label ar-only">مجاني لمدة 3 أشهر</div>
+                    <div class="stat-label en-only">Free for 3 Months</div>
+                </div>
 
-</div>
+                <div class="stat-item">
+                    <div class="stat-number">20</div>
+                    <div class="stat-label ar-only">مهني أولي</div>
+                    <div class="stat-label en-only">Early Professionals</div>
+                </div>
 
-<script>
-// ⚠️ عدّل هذا البريد لبريدك الشخصي باش توصلك التسجيلات
-// ⚠️ Replace this email with your own so signups reach you
-const OWNER_EMAIL = "REPLACE_WITH_YOUR_EMAIL@example.com";
+                <div class="stat-item">
+                    <div class="stat-number">30s</div>
+                    <div class="stat-label ar-only">لإتمام الحجز</div>
+                    <div class="stat-label en-only">to Complete Booking</div>
+                </div>
 
-function setLang(lang){
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.getElementById('btn-ar').classList.toggle('active', lang==='ar');
-  document.getElementById('btn-en').classList.toggle('active', lang==='en');
-  document.querySelectorAll('[data-ar]').forEach(el=>{
-    el.textContent = lang==='ar' ? el.dataset.ar : el.dataset.en;
-  });
-  document.querySelectorAll('input, button[type=submit]').forEach(()=>{});
-  document.getElementById('f-profession').placeholder = lang==='ar' ? 'مثلاً: مدرب رياضي' : 'e.g. fitness coach';
-  localStorage.setItem('tasklink_lang', lang);
-}
+                <div class="stat-item">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label ar-only">خدمة مستمرة</div>
+                    <div class="stat-label en-only">Continuous Service</div>
+                </div>
+            </div>
 
-function scrollToForm(){
-  document.getElementById('form-section').scrollIntoView({behavior:'smooth'});
-}
+            <!-- Registration Form -->
+            <div class="form-section" id="register">
+                <h2 class="form-title ar-only">📝 انضم الآن كأول مهني</h2>
+                <h2 class="form-title en-only">📝 Join Now as Early Professional</h2>
 
-document.getElementById('signup-form').addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('f-name').value.trim();
-  const profession = document.getElementById('f-profession').value.trim();
-  const city = document.getElementById('f-city').value.trim();
-  const phone = document.getElementById('f-phone').value.trim();
+                <form onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label class="ar-only">الاسم الكامل *</label>
+                        <label class="en-only">Full Name *</label>
+                        <input type="text" id="name" required class="ar-only" placeholder="أدخل اسمك الكامل">
+                        <input type="text" id="name_en" required class="en-only" placeholder="Enter your full name">
+                    </div>
 
-  // نخزنو نسخة محلياً كنسخة احتياطية
-  try{
-    const entries = JSON.parse(localStorage.getItem('tasklink_signups') || '[]');
-    entries.push({name, profession, city, phone, date: new Date().toISOString()});
-    localStorage.setItem('tasklink_signups', JSON.stringify(entries));
-  }catch(err){ console.error(err); }
+                    <div class="form-group">
+                        <label class="ar-only">المهنة *</label>
+                        <label class="en-only">Profession *</label>
+                        <select id="profession" required class="ar-only">
+                            <option value="">اختر مهنتك</option>
+                            <option value="coach">كوتش رياضي</option>
+                            <option value="hairdresser">مصفف شعر</option>
+                            <option value="dentist">طبيب أسنان</option>
+                            <option value="tutor">أستاذ دروس خصوصية</option>
+                            <option value="photographer">مصور فوتوغرافي</option>
+                            <option value="trainer">مدرب لياقة</option>
+                            <option value="other">أخرى</option>
+                        </select>
+                        <select id="profession_en" required class="en-only">
+                            <option value="">Select your profession</option>
+                            <option value="coach">Sports Coach</option>
+                            <option value="hairdresser">Hairdresser</option>
+                            <option value="dentist">Dentist</option>
+                            <option value="tutor">Private Tutor</option>
+                            <option value="photographer">Photographer</option>
+                            <option value="trainer">Fitness Trainer</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
 
-  // نفتحو بريد جاهز بالمعلومات باش توصل للمالك
-  const subject = encodeURIComponent('تسجيل مهني جديد - TaskLink');
-  const body = encodeURIComponent(
-    `الاسم: ${name}\nالمهنة: ${profession}\nالمدينة: ${city}\nالهاتف: ${phone}`
-  );
-  window.location.href = `mailto:${OWNER_EMAIL}?subject=${subject}&body=${body}`;
+                    <div class="form-group">
+                        <label class="ar-only">المدينة *</label>
+                        <label class="en-only">City *</label>
+                        <input type="text" id="city" required class="ar-only" placeholder="أدخل مدينتك">
+                        <input type="text" id="city_en" required class="en-only" placeholder="Enter your city">
+                    </div>
 
-  document.getElementById('signup-form').style.display = 'none';
-  document.getElementById('thankyou').classList.add('show');
-});
+                    <div class="form-group">
+                        <label class="ar-only">رقم الهاتف *</label>
+                        <label class="en-only">Phone Number *</label>
+                        <input type="tel" id="phone" required class="ar-only" placeholder="أدخل رقم هاتفك">
+                        <input type="tel" id="phone_en" required class="en-only" placeholder="Enter your phone number">
+                    </div>
 
-// استرجاع اللغة المحفوظة
-const savedLang = localStorage.getItem('tasklink_lang');
-if(savedLang) setLang(savedLang);
-</script>
+                    <div class="form-group">
+                        <label class="ar-only">البريد الإلكتروني</label>
+                        <label class="en-only">Email</label>
+                        <input type="email" id="email" class="ar-only" placeholder="أدخل بريدك الإلكتروني">
+                        <input type="email" id="email_en" class="en-only" placeholder="Enter your email">
+                    </div>
 
+                    <button type="submit" class="submit-btn ar-only">
+                        ✅ سجل الآن - 3 أشهر مجاناً
+                    </button>
+                    <button type="submit" class="submit-btn en-only">
+                        ✅ Register Now - 3 Months Free
+                    </button>
+                </form>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="footer-social">
+                    <a href="#" class="social-btn">
+                        <i>📘</i>
+                    </a>
+                    <a href="#" class="social-btn">
+                        <i>📸</i>
+         </a>
+                    <a href="#" class="social-btn">
+                        <i>💼</i>
+                    </a>
+                </div>
+
+                <p class="footer-text ar-only">
+                    © 2024 TaskLink - جميع الحقوق محفوظة | صُنع بحب في الجزائر 🇩🇿
+                </p>
+                <p class="footer-text en-only">
+                    © 2024 TaskLink - All Rights Reserved | Made with love in Algeria 🇩🇿
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Language switching function
+        function switchLang(lang) {
+            const html = document.documentElement;
+            const buttons = document.querySelectorAll('.lang-btn');
+
+            if (lang === 'ar') {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            } else {
+                html.lang = 'en';
+                html.dir = 'ltr';
+                buttons[1].classList.add('active');
+                buttons[0].classList.remove('active');
+            }
+        }
+
+        // Form submission handler
+        function submitForm(event) {
+            event.preventDefault();
+
+            const lang = document.documentElement.lang;
+            const name = document.getElementById(lang === 'ar' ? 'name' : 'name_en').value;
+            const profession = document.getElementById(lang === 'ar' ? 'profession' : 'profession_en').value;
+            const city = document.getElementById(lang === 'ar' ? 'city' : 'city_en').value;
+            const phone = document.getElementById(lang === 'ar' ? 'phone' : 'phone_en').value;
+            const email = document.getElementById(lang === 'ar' ? 'email' : 'email_en').value;
+
+            // Prepare email content
+            const subject = lang === 'ar' ? 'تسجيل مهني جديد - TaskLink' : 'New Professional Registration - TaskLink';
+            const body = lang === 'ar' 
+                ? `معلومات التسجيل:\n\nالاسم: ${name}\nالمهنة: ${profession}\nالمدينة: ${city}\nالهاتف: ${phone}\nالبريد: ${email}`
+                : `Registration Information:\n\nName: ${name}\nProfession: ${profession}\nCity: ${city}\nPhone: ${phone}\nEmail: ${email}`;
+
+            // Open email client
+            window.location.href = `mailto:louaithelion@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+    </script>
 </body>
-        </html>
+</html>

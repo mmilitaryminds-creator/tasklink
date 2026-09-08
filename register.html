@@ -261,7 +261,7 @@
 <body>
     <!-- Top Bar -->
     <div class="top-bar">
-        <!-- Logo (Small, Top Right) -->
+        <!-- Logo -->
         <div class="logo">
             <span>🔗</span> TaskLink
         </div>
@@ -362,8 +362,9 @@
     <div class="footer">
         <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
         <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
-  </div>
-      <script>
+    </div>
+
+    <script>
         // ===== LANGUAGE SWITCHING =====
         function switchLang(lang) {
             const html = document.documentElement;
@@ -397,16 +398,6 @@
             const successMessage = document.getElementById('successMessage');
             successMessage.style.display = 'block';
 
-            // Prepare email to owner
-            const ownerEmail = 'louaithelion@gmail.com';
-            const subject = lang === 'ar' ? 'تسجيل مهني جديد - TaskLink' : 'New Professional Registration - TaskLink';
-            const body = lang === 'ar'
-                ? `معلومات التسجيل:\n\nالاسم: ${name}\nالمهنة: ${profession}\nالمدينة: ${city}\nالهاتف: ${phone}\nالبريد: ${email}`
-                : `Registration Information:\n\nName: ${name}\nProfession: ${profession}\nCity: ${city}\nPhone: ${phone}\nEmail: ${email}`;
-
-            // Open email client (mailto)
-            window.location.href = `mailto:${ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
             // Reset form after 3 seconds
             setTimeout(() => {
                 document.getElementById('name').value = '';
@@ -419,6 +410,7 @@
                 document.getElementById('phone_ar').value = '';
                 document.getElementById('email').value = '';
                 document.getElementById('email_ar').value = '';
+                successMessage.style.display = 'none';
             }, 3000);
         }
     </script>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskLink - Book Appointment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 2000;
+        }
+
+        /* ===== LOGO ===== */
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+        }
+
+        .logo span {
+            color: #00a8ff;
+        }
+
+        /* ===== LANGUAGE SWITCHER ===== */
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #00a8ff;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== RETURN BUTTON ===== */
+        .return-btn {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .return-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== BOOKING SECTION ===== */
+        .booking-section {
+            max-width: 700px;
+            margin: 120px auto 40px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+
+        .booking-title {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+        }
+
+        .booking-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* ===== PROFESSIONAL INFO ===== */
+        .professional-info {
+            background: rgba(0, 168, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 168, 255, 0.3);
+        }
+
+        .professional-info h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .professional-info p {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        /* ===== FORM FIELDS ===== */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00a8ff;
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* ===== SERVICE TYPE ===== */
+        .service-type {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .service-option {
+            flex: 1;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-option:hover {
+            border-color: #00a8ff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .service-option.active {
+            border-color: #00a8ff;
+            background: rgba(0, 168, 255, 0.3);
+        }
+
+        .service-option-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .service-option-label {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
+            color: #ffffff;
+            padding: 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.5), 0 0 40px rgba(0, 168, 255, 0.2);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.7), 0 0 60px rgba(0, 168, 255, 0.4);
+        }
+
+        /* ===== SUCCESS MESSAGE ===== */
+        .success-message {
+            display: none;
+            background: rgba(46, 213, 115, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 30px 30px 0 0;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 60px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            .booking-section {
+                padding: 20px;
+                margin: 100px 20px 40px;
+            }
+
+            .booking-title {
+                font-size: 24px;
+            }
+
+            .service-type {
+                flex-direction: column;
+            }
+
+            .top-bar {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+
+        /* ===== LANGUAGE SWITCHING ===== */
+        .ar-only {
+            display: none;
+        }
+
+        .en-only {
+            display: block;
+        }
+
+        html[lang="ar"] .ar-only {
+            display: block;
+        }
+
+        html[lang="ar"] .en-only {
+            display: none;
+        }
+
+        html[lang="ar"] {
+            direction: rtl;
+        }
+
+        html[lang="ar"] .return-btn {
+            direction: ltr;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <!-- Logo -->
+        <div class="logo">
+            <span>🔗</span> TaskLink
+        </div>
+
+        <!-- Return Button -->
+        <a href="professionals.html" class="return-btn">
+            <span class="en-only">← Back to Professionals</span>
+            <span class="ar-only">→ العودة للمهنيين</span>
+        </a>
+
+        <!-- Language Switcher -->
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="switchLang('en')">English</button>
+            <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <h2 class="booking-title en-only">Book Your Appointment</h2>
+        <h2 class="booking-title ar-only">احجز موعدك</h2>
+
+        <p class="booking-subtitle en-only">
+            Fill in your information below and the professional will confirm your booking
+        </p>
+        <p class="booking-subtitle ar-only">
+            املأ معلوماتك أدناه وسيؤكد المهني حجزك
+        </p>
+
+        <!-- Professional Info -->
+        <div class="professional-info">
+            <h3 id="professionalName">Professional Name</h3>
+            <p id="professionalDetails">Profession • City • Country</p>
+        </div>
+
+        <form onsubmit="submitForm(event)">
+            <div class="form-group">
+                <label class="en-only">Client Name *</label>
+                <label class="ar-only">اسم الزبون *</label>
+                <input type="text" id="clientName" required class="en-only" placeholder="Enter your name">
+                <input type="text" id="clientName_ar" required class="ar-only" placeholder="أدخل اسمك">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Client Phone *</label>
+                <label class="ar-only">هاتف الزبون *</label>
+                <input type="tel" id="clientPhone" required class="en-only" placeholder="Enter your phone number">
+                <input type="tel" id="clientPhone_ar" required class="ar-only" placeholder="أدخل رقم هاتفك">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Service Type *</label>
+                <label class="ar-only">نوع الخدمة *</label>
+                <div class="service-type">
+                    <div class="service-option active" onclick="selectService('online')">
+                        <div class="service-option-icon">💻</div>
+                        <div class="service-option-label en-only">Online</div>
+                        <div class="service-option-label ar-only">أونلاين</div>
+                    </div>
+                    <div class="service-option" onclick="selectService('in_person')">
+                        <div class="service-option-icon">🏢</div>
+                        <div class="service-option-label en-only">In Person</div>
+                        <div class="service-option-label ar-only">حضوري</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Date *</label>
+                <label class="ar-only">التاريخ *</label>
+                <input type="date" id="appointmentDate" required>
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Time *</label>
+                <label class="ar-only">الوقت *</label>
+                <input type="time" id="appointmentTime" required>
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Notes</label>
+                <label class="ar-only">ملاحظات</label>
+                <textarea id="notes" class="en-only" placeholder="Any additional notes..."></textarea>
+                <textarea id="notes_ar" class="ar-only" placeholder="أي ملاحظات إضافية..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <span class="en-only">✅ Confirm Booking</span>
+                <span class="ar-only">✅ تأكيد الحجز</span>
+            </button>
+        </form>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <p class="en-only">🎉 Booking Confirmed! The professional will contact you soon</p>
+            <p class="ar-only">🎉 تم تأكيد الحجز! سيتواصل معك المهني قريباً</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
+        <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
+    </div>
+        <script>
+        // ===== LANGUAGE SWITCHING =====
+        function switchLang(lang) {
+            const html = document.documentElement;
+            const buttons = document.querySelectorAll('.lang-btn');
+
+            if (lang === 'ar') {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            } else {
+                html.lang = 'en';
+                html.dir = 'ltr';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            }
+        }
+
+        // ===== SERVICE TYPE SELECTION =====
+        function selectService(type) {
+            const options = document.querySelectorAll('.service-option');
+            options.forEach(option => option.classList.remove('active'));
+            
+            if (type === 'online') {
+                options[0].classList.add('active');
+            } else {
+                options[1].classList.add('active');
+            }
+        }
+
+        // ===== FORM SUBMISSION =====
+        function submitForm(event) {
+            event.preventDefault();
+
+            const lang = document.documentElement.lang;
+            const clientName = document.getElementById(lang === 'ar' ? 'clientName_ar' : 'clientName').value;
+            const clientPhone = document.getElementById(lang === 'ar' ? 'clientPhone_ar' : 'clientPhone').value;
+            const serviceType = document.querySelector('.service-option.active .service-option-label').textContent;
+            const date = document.getElementById('appointmentDate').value;
+            const time = document.getElementById('appointmentTime').value;
+            const notes = document.getElementById(lang === 'ar' ? 'notes_ar' : 'notes').value;
+
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+
+            // Prepare email to professional
+            const professionalEmail = 'professionals-email@example.com'; // TODO: Replace with actual professional email
+            const subject = lang === 'ar' ? 'حجز جديد - TaskLink' : 'New Booking - TaskLink';
+            const body = lang === 'ar'
+                ? `معلومات الحجز:\n\nاسم الزبون: ${clientName}\nهاتف الزبون: ${clientPhone}\nنوع الخدمة: ${serviceType}\nالتاريخ: ${date}\nالوقت: ${time}\nملاحظات: ${notes}`
+                : `Booking Information:\n\nClient Name: ${clientName}\nClient Phone: ${clientPhone}\nService Type: ${serviceType}\nDate: ${date}\nTime: ${time}\nNotes: ${notes}`;
+
+            // Open email client (mailto)
+            window.location.href = `mailto:${professionalEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                document.getElementById('clientName').value = '';
+                document.getElementById('clientName_ar').value = '';
+                document.getElementById('clientPhone').value = '';
+                document.getElementById('clientPhone_ar').value = '';
+                document.getElementById('appointmentDate').value = '';
+                document.getElementById('appointmentTime').value = '';
+                document.getElementById('notes').value = '';
+                document.getElementById('notes_ar').value = '';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

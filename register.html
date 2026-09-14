@@ -19,7 +19,6 @@
             overflow-x: hidden;
         }
 
-        /* ===== TOP BAR ===== */
         .top-bar {
             position: fixed;
             top: 0;
@@ -36,19 +35,17 @@
             z-index: 2000;
         }
 
-        /* ===== LOGO ===== */
         .logo {
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
         }
 
         .logo span {
             color: #00a8ff;
         }
 
-        /* ===== LANGUAGE SWITCHER ===== */
         .lang-switch {
             display: flex;
             gap: 10px;
@@ -73,11 +70,6 @@
             box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
         }
 
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ===== RETURN BUTTON ===== */
         .return-btn {
             background: rgba(255, 255, 255, 0.1);
             padding: 10px 20px;
@@ -90,11 +82,6 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .return-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ===== FORM SECTION ===== */
         .form-section {
             max-width: 600px;
             margin: 120px auto 40px;
@@ -117,79 +104,37 @@
             font-size: 16px;
             opacity: 0.9;
             line-height: 1.6;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
-        /* ===== FORM FIELDS ===== */
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #00a8ff;
-            outline: none;
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* ===== SUBMIT BUTTON ===== */
-        .submit-btn {
-            width: 100%;
+        .register-btn {
+            display: inline-block;
             background: linear-gradient(45deg, #00a8ff, #00d2ff);
             color: #ffffff;
-            padding: 20px;
-            border: none;
+            padding: 20px 50px;
             border-radius: 50px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
-            cursor: pointer;
+            text-decoration: none;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(0, 168, 255, 0.5), 0 0 40px rgba(0, 168, 255, 0.2);
+            cursor: pointer;
+            border: none;
+            margin-bottom: 20px;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
+        .register-btn:hover {
+            transform: translateY(-5px);
             box-shadow: 0 0 30px rgba(0, 168, 255, 0.7), 0 0 60px rgba(0, 168, 255, 0.4);
         }
 
-        /* ===== SUCCESS MESSAGE ===== */
-        .success-message {
-            display: none;
-            background: rgba(46, 213, 115, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-            animation: fadeInUp 0.5s ease;
+        .note {
+            font-size: 14px;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-top: 30px;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 30px;
@@ -200,172 +145,67 @@
             margin-top: 40px;
         }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
-            .top-bar {
-                padding: 0 15px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
-
-            .form-section {
-                padding: 20px;
-                margin: 100px 20px 40px;
-            }
-
-            .form-title {
-                font-size: 24px;
-            }
+            .top-bar { padding: 0 15px; }
+            .logo { font-size: 18px; }
+            .form-section { padding: 20px; margin: 100px 20px 40px; }
+            .form-title { font-size: 24px; }
+            .register-btn { padding: 15px 30px; font-size: 16px; }
         }
 
-        /* ===== LANGUAGE SWITCHING ===== */
-        .ar-only {
-            display: none;
-        }
-
-        .en-only {
-            display: block;
-        }
-
-        html[lang="ar"] .ar-only {
-            display: block;
-        }
-
-        html[lang="ar"] .en-only {
-            display: none;
-        }
-
-        html[lang="ar"] {
-            direction: rtl;
-        }
-
-        html[lang="ar"] .return-btn {
-            direction: ltr;
-        }
+        .ar-only { display: none; }
+        .en-only { display: block; }
+        html[lang="ar"] .ar-only { display: block; }
+        html[lang="ar"] .en-only { display: none; }
+        html[lang="ar"] { direction: rtl; }
+        html[lang="ar"] .return-btn { direction: ltr; }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
     <div class="top-bar">
-        <!-- Logo -->
-        <div class="logo">
-            <span>🔗</span> TaskLink
-        </div>
-
-        <!-- Return Button -->
+        <div class="logo"><span>🔗</span> TaskLink</div>
         <a href="index.html" class="return-btn">
             <span class="en-only">← Back to Home</span>
             <span class="ar-only">→ العودة للصفحة الرئيسية</span>
         </a>
-
-        <!-- Language Switcher -->
         <div class="lang-switch">
             <button class="lang-btn active" onclick="switchLang('en')">English</button>
             <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
         </div>
     </div>
 
-    <!-- Form Section -->
     <section class="form-section">
         <h2 class="form-title en-only">Join Now as Early Professional</h2>
         <h2 class="form-title ar-only">انضم الآن كأول مهني</h2>
 
         <p class="form-subtitle en-only">
-            Fill in your information below and start receiving bookings from clients
+            Click the button below to fill in your information and start receiving bookings from clients
         </p>
         <p class="form-subtitle ar-only">
-            املأ معلوماتك أدناه وابدأ في استقبال الحجوزات من الزبائن
+            اضغط على الزر أدناه لملء معلوماتك والبدء في استقبال الحجوزات من الزبائن
         </p>
 
-        <form onsubmit="submitForm(event)">
-            <div class="form-group">
-                <label class="en-only">Full Name *</label>
-                <label class="ar-only">الاسم الكامل *</label>
-                <input type="text" id="name" required class="en-only" placeholder="Enter your full name">
-                <input type="text" id="name_ar" required class="ar-only" placeholder="أدخل اسمك الكامل">
-            </div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9E1JYJN8RQEgWqho5a3iubdsayg2gpVP_eqwTFsmEXSvyiQ/viewform" 
+           target="_blank" 
+           class="register-btn">
+            <span class="en-only">🚀 Register Now - 3 Months Free</span>
+            <span class="ar-only">🚀 سجل الآن - 3 أشهر مجاناً</span>
+        </a>
 
-            <div class="form-group">
-                <label class="en-only">Profession *</label>
-                <label class="ar-only">المهنة *</label>
-                <select id="profession" required class="en-only">
-                    <option value="">Select your profession</option>
-                    <option value="coach">Sports Coach</option>
-                    <option value="hairdresser">Hairdresser</option>
-                    <option value="dentist">Dentist</option>
-                    <option value="tutor">Private Tutor</option>
-                    <option value="photographer">Photographer</option>
-                    <option value="trainer">Fitness Trainer</option>
-                    <option value="other">Other</option>
-                </select>
-                <select id="profession_ar" required class="ar-only">
-                    <option value="">اختر مهنتك</option>
-                    <option value="coach">كوتش رياضي</option>
-                    <option value="hairdresser">مصفف شعر</option>
-                    <option value="dentist">طبيب أسنان</option>
-                    <option value="tutor">أستاذ دروس خصوصية</option>
-                    <option value="photographer">مصور فوتوغرافي</option>
-                    <option value="trainer">مدرب لياقة</option>
-                    <option value="other">أخرى</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="en-only">City *</label>
-                <label class="ar-only">المدينة *</label>
-                <input type="text" id="city" required class="en-only" placeholder="Enter your city">
-                <input type="text" id="city_ar" required class="ar-only" placeholder="أدخل مدينتك">
-            </div>
-
-            <div class="form-group">
-                <label class="en-only">Phone Number *</label>
-                <label class="ar-only">رقم الهاتف *</label>
-                <input type="tel" id="phone" required class="en-only" placeholder="Enter your phone number">
-                <input type="tel" id="phone_ar" required class="ar-only" placeholder="أدخل رقم هاتفك">
-            </div>
-
-            <div class="form-group">
-                <label class="en-only">Email *</label>
-                <label class="ar-only">البريد الإلكتروني *</label>
-                <input type="email" id="email" required class="en-only" placeholder="Enter your email">
-                <input type="email" id="email_ar" required class="ar-only" placeholder="أدخل بريدك الإلكتروني">
-            </div>
-
-            <button type="submit" class="submit-btn">
-                <span class="en-only">✅ Register Now - 3 Months Free</span>
-                <span class="ar-only">✅ سجل الآن - 3 أشهر مجاناً</span>
-            </button>
-        </form>
-
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage">
-            <p class="en-only">🎉 Registration Successful! We'll contact you soon</p>
-            <p class="ar-only">🎉 تم التسجيل بنجاح! سنتواصل معك قريباً</p>
-        </div>
+        <p class="note en-only">
+            You will be redirected to a secure Google Form
+        </p>
+        <p class="note ar-only">
+            سيتم توجيهك إلى نموذج Google آمن
+        </p>
     </section>
 
-    <!-- Footer -->
     <div class="footer">
         <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
         <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
     </div>
 
     <script>
-        // ===== LANGUAGE SWITCHING =====
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');
@@ -381,37 +221,6 @@
                 buttons[0].classList.add('active');
                 buttons[1].classList.remove('active');
             }
-        }
-
-        // ===== FORM SUBMISSION =====
-        function submitForm(event) {
-            event.preventDefault();
-
-            const lang = document.documentElement.lang;
-            const name = document.getElementById(lang === 'ar' ? 'name_ar' : 'name').value;
-            const profession = document.getElementById(lang === 'ar' ? 'profession_ar' : 'profession').value;
-            const city = document.getElementById(lang === 'ar' ? 'city_ar' : 'city').value;
-            const phone = document.getElementById(lang === 'ar' ? 'phone_ar' : 'phone').value;
-            const email = document.getElementById(lang === 'ar' ? 'email_ar' : 'email').value;
-
-            // Show success message
-            const successMessage = document.getElementById('successMessage');
-            successMessage.style.display = 'block';
-
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                document.getElementById('name').value = '';
-                document.getElementById('name_ar').value = '';
-                document.getElementById('profession').value = '';
-                document.getElementById('profession_ar').value = '';
-                document.getElementById('city').value = '';
-                document.getElementById('city_ar').value = '';
-                document.getElementById('phone').value = '';
-                document.getElementById('phone_ar').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('email_ar').value = '';
-                successMessage.style.display = 'none';
-            }, 3000);
         }
     </script>
 </body>

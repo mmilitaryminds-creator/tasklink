@@ -163,33 +163,95 @@
             color: #d0d8e0;
         }
 
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #00d2ff;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 15px;
+            border: 1.5px solid rgba(0, 168, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #00d2ff;
+            outline: none;
+            background: rgba(0, 168, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.3);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .form-group select option {
+            background: #0a0e1a;
+            color: #ffffff;
+        }
+
         .register-btn {
-            display: inline-block;
+            width: 100%;
             background: linear-gradient(45deg, #00a8ff, #00d2ff);
             color: #ffffff;
-            padding: 20px 55px;
+            padding: 18px;
+            border: none;
             border-radius: 50px;
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 800;
-            text-decoration: none;
+            cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 0 25px rgba(0, 168, 255, 0.6);
-            cursor: pointer;
-            border: none;
-            margin-bottom: 25px;
+            margin-top: 10px;
         }
 
         .register-btn:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: 0 0 40px rgba(0, 168, 255, 0.8);
         }
 
-        .note {
-            font-size: 14px;
-            opacity: 0.8;
-            line-height: 1.6;
-            margin-top: 30px;
-            color: #d0d8e0;
+        .success-message {
+            display: none;
+            background: rgba(46, 213, 115, 0.2);
+            border: 1.5px solid rgba(46, 213, 115, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 600;
+            color: #2ed573;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .error-message {
+            display: none;
+            background: rgba(255, 71, 87, 0.2);
+            border: 1.5px solid rgba(255, 71, 87, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 25px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ff4757;
+            animation: fadeInUp 0.5s ease;
         }
 
         .footer {
@@ -214,7 +276,6 @@
             .return-btn { padding: 6px 12px; font-size: 11px; }
             .form-section { padding: 30px 20px; margin: 100px 15px 40px; }
             .form-title { font-size: 26px; }
-            .register-btn { padding: 16px 35px; font-size: 16px; }
         }
 
         .ar-only { display: none; }
@@ -244,25 +305,81 @@
         <h2 class="form-title ar-only">انضم الآن كأول مهني</h2>
 
         <p class="form-subtitle en-only">
-            Click the button below to fill in your information and start receiving bookings from clients
+            Fill in your information below and start receiving bookings from clients
         </p>
         <p class="form-subtitle ar-only">
-            اضغط على الزر أدناه لملء معلوماتك والبدء في استقبال الحجوزات من الزبائن
+            املأ معلوماتك أدناه وابدأ في استقبال الحجوزات من الزبائن
         </p>
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9E1JYJN8RQEgWqho5a3iubdsayg2gpVP_eqwTFsmEXSvyiQ/viewform" 
-           target="_blank" 
-           class="register-btn">
-            <span class="en-only">🚀 Register Now - 3 Months Free</span>
-            <span class="ar-only">🚀 سجل الآن - 3 أشهر مجاناً</span>
-        </a>
+        <form action="https://formspree.io/f/xeaoovdy" method="POST" id="registerForm">
+            <div class="form-group">
+                <label class="en-only">Full Name *</label>
+                <label class="ar-only">الاسم الكامل *</label>
+                <input type="text" name="name" required class="en-only" placeholder="Enter your full name">
+                <input type="text" name="name_ar" required class="ar-only" placeholder="أدخل اسمك الكامل">
+            </div>
 
-        <p class="note en-only">
-            You will be redirected to a secure Google Form
-        </p>
-        <p class="note ar-only">
-            سيتم توجيهك إلى نموذج Google آمن
-        </p>
+            <div class="form-group">
+                <label class="en-only">Profession *</label>
+                <label class="ar-only">المهنة *</label>
+                <select name="profession" required class="en-only">
+                    <option value="">Select your profession</option>
+                    <option value="coach">Sports Coach</option>
+                    <option value="hairdresser">Hairdresser</option>
+                    <option value="dentist">Dentist</option>
+                    <option value="tutor">Private Tutor</option>
+                    <option value="photographer">Photographer</option>
+                    <option value="trainer">Fitness Trainer</option>
+                    <option value="other">Other</option>
+                </select>
+                <select name="profession_ar" required class="ar-only">
+                    <option value="">اختر مهنتك</option>
+                    <option value="coach">كوتش رياضي</option>
+                    <option value="hairdresser">مصفف شعر</option>
+                    <option value="dentist">طبيب أسنان</option>
+                    <option value="tutor">أستاذ دروس خصوصية</option>
+                    <option value="photographer">مصور فوتوغرافي</option>
+                    <option value="trainer">مدرب لياقة</option>
+                    <option value="other">أخرى</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">City *</label>
+                <label class="ar-only">المدينة *</label>
+                <input type="text" name="city" required class="en-only" placeholder="Enter your city">
+                <input type="text" name="city_ar" required class="ar-only" placeholder="أدخل مدينتك">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Phone Number *</label>
+                <label class="ar-only">رقم الهاتف *</label>
+                <input type="tel" name="phone" required class="en-only" placeholder="Enter your phone number">
+                <input type="tel" name="phone_ar" required class="ar-only" placeholder="أدخل رقم هاتفك">
+            </div>
+
+            <div class="form-group">
+                <label class="en-only">Email *</label>
+                <label class="ar-only">البريد الإلكتروني *</label>
+                <input type="email" name="email" required class="en-only" placeholder="Enter your email">
+                <input type="email" name="email_ar" required class="ar-only" placeholder="أدخل بريدك الإلكتروني">
+            </div>
+
+            <button type="submit" class="register-btn">
+                <span class="en-only">✅ Register Now - 3 Months Free</span>
+                <span class="ar-only">✅ سجل الآن - 3 أشهر مجاناً</span>
+            </button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <p class="en-only">🎉 Registration Successful! We'll contact you soon</p>
+            <p class="ar-only">🎉 تم التسجيل بنجاح! سنتواصل معك قريباً</p>
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <p class="en-only">❌ Something went wrong. Please try again</p>
+            <p class="ar-only">❌ حدث خطأ. الرجاء المحاولة مرة أخرى</p>
+        </div>
     </section>
 
     <div class="footer">
@@ -294,6 +411,40 @@
 
             localStorage.setItem('tasklink_lang', lang);
         }
+
+        // ===== FORM SUBMISSION WITH FORMSPREE =====
+        const form = document.getElementById('registerForm');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const data = new FormData(form);
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    successMessage.style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    form.reset();
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                } else {
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                }
+            } catch (error) {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>

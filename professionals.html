@@ -13,10 +13,36 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: #0a0e1a;
             min-height: 100vh;
             color: #ffffff;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 14, 26, 0.85) 0%, rgba(15, 32, 39, 0.85) 50%, rgba(44, 83, 100, 0.85) 100%);
+            z-index: -1;
         }
 
         /* ===== TOP BAR ===== */
@@ -26,9 +52,9 @@
             left: 0;
             right: 0;
             height: 70px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -36,23 +62,55 @@
             z-index: 2000;
         }
 
-        /* ===== LOGO ===== */
         .logo {
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
             text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+            color: #ffffff;
         }
 
         .logo span {
             color: #00a8ff;
         }
 
-        /* ===== LANGUAGE SWITCHER ===== */
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1.5px solid rgba(0, 168, 255, 0.5);
+            color: #00d2ff;
+            padding: 8px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .return-btn:hover {
+            background: rgba(0, 168, 255, 0.15);
+            border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
         .lang-switch {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .lang-btn {
@@ -60,38 +118,21 @@
             border: none;
             color: #ffffff;
             cursor: pointer;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .lang-btn.active {
-            background: #00a8ff;
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 2px 10px rgba(0, 168, 255, 0.5);
         }
 
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ===== RETURN BUTTON ===== */
-        .return-btn {
+        .lang-btn:hover:not(.active) {
             background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 50px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .return-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
         }
 
         /* ===== PROFESSIONALS SECTION ===== */
@@ -103,46 +144,59 @@
         }
 
         .professionals-title {
-            font-size: 36px;
+            font-size: 42px;
             font-weight: 900;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
+            animation: fadeInUp 0.8s ease;
         }
 
         .professionals-subtitle {
             font-size: 18px;
             opacity: 0.9;
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            color: #d0d8e0;
+            animation: fadeInUp 1s ease;
         }
 
         /* ===== EMPTY STATE ===== */
         .empty-state {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            padding: 60px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
+            padding: 60px 40px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(0, 168, 255, 0.2);
             text-align: center;
             margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1.2s ease;
         }
 
         .empty-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
+            font-size: 90px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 0 25px rgba(0, 168, 255, 0.6));
         }
 
         .empty-title {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #00d2ff;
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
         }
 
         .empty-desc {
             font-size: 16px;
             opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            line-height: 1.8;
+            margin-bottom: 35px;
+            color: #d0d8e0;
         }
 
         /* ===== REGISTER BUTTON ===== */
@@ -150,110 +204,71 @@
             display: inline-block;
             background: linear-gradient(45deg, #00a8ff, #00d2ff);
             color: #ffffff;
-            padding: 15px 35px;
+            padding: 18px 45px;
             border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 800;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 168, 255, 0.5), 0 0 40px rgba(0, 168, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6), 0 0 50px rgba(0, 168, 255, 0.3);
+            cursor: pointer;
+            border: none;
         }
 
         .register-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.7), 0 0 60px rgba(0, 168, 255, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 168, 255, 0.8), 0 0 80px rgba(0, 168, 255, 0.4);
         }
 
         /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 30px 30px 0 0;
             font-size: 14px;
             opacity: 0.8;
-            margin-top: 60px;
+            margin-top: 80px;
+            color: #d0d8e0;
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
-            .professionals-title {
-                font-size: 28px;
-            }
-
-            .empty-state {
-                padding: 30px;
-            }
-
-            .top-bar {
-                padding: 0 15px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
+            .top-bar { padding: 0 15px; height: 65px; }
+            .logo { font-size: 18px; }
+            .return-btn { padding: 6px 12px; font-size: 11px; }
+            .professionals-title { font-size: 28px; }
+            .empty-state { padding: 40px 20px; }
+            .empty-icon { font-size: 70px; }
+            .empty-title { font-size: 22px; }
         }
 
-        /* ===== LANGUAGE SWITCHING ===== */
-        .ar-only {
-            display: none;
-        }
-
-        .en-only {
-            display: block;
-        }
-
-        html[lang="ar"] .ar-only {
-            display: block;
-        }
-
-        html[lang="ar"] .en-only {
-            display: none;
-        }
-
-        html[lang="ar"] {
-            direction: rtl;
-        }
-
-        html[lang="ar"] .return-btn {
-            direction: ltr;
-        }
+        .ar-only { display: none; }
+        .en-only { display: block; }
+        html[lang="ar"] .ar-only { display: block; }
+        html[lang="ar"] .en-only { display: none; }
+        html[lang="ar"] { direction: rtl; }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
     <div class="top-bar">
-        <!-- Logo -->
-        <div class="logo">
-            <span>🔗</span> TaskLink
-        </div>
-
-        <!-- Return Button -->
-        <a href="booking.html" class="return-btn">
-            <span class="en-only">← Back to Professions</span>
-            <span class="ar-only">→ العودة للمهن</span>
-        </a>
-
-        <!-- Language Switcher -->
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+        <div class="logo"><span>🔗</span> TaskLink</div>
+        <div class="top-bar-right">
+            <a href="booking.html" class="return-btn">
+                <span class="en-only">← Back</span>
+                <span class="ar-only">→ رجوع</span>
+            </a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="switchLang('en')">English</button>
+                <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+            </div>
         </div>
     </div>
 
-    <!-- Professionals Section -->
     <section class="professionals-section">
         <h2 class="professionals-title en-only">Find Professionals</h2>
         <h2 class="professionals-title ar-only">ابحث عن المهنيين</h2>
@@ -265,7 +280,6 @@
             اختر أفضل مهني يناسب احتياجاتك
         </p>
 
-        <!-- Empty State -->
         <div class="empty-state">
             <div class="empty-icon">🔍</div>
             <h3 class="empty-title en-only">No Professionals Found</h3>
@@ -285,13 +299,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <div class="footer">
         <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
         <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
     </div>
-        <script>
-        // ===== LANGUAGE SWITCHING =====
+
+    <script>
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');

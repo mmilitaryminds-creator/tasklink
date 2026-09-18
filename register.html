@@ -45,7 +45,6 @@
             z-index: -1;
         }
 
-        /* ===== TOP BAR ===== */
         .top-bar {
             position: fixed;
             top: 0;
@@ -66,13 +65,11 @@
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
             color: #ffffff;
         }
 
-        .logo span {
-            color: #00a8ff;
-        }
+        .logo span { color: #00a8ff; }
 
         .top-bar-right {
             display: flex;
@@ -80,7 +77,6 @@
             gap: 15px;
         }
 
-        /* ===== RETURN BUTTON ===== */
         .return-btn {
             display: inline-flex;
             align-items: center;
@@ -104,7 +100,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== LANGUAGE SWITCHER ===== */
         .lang-switch {
             display: flex;
             gap: 5px;
@@ -137,7 +132,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== FORM SECTION ===== */
         .form-section {
             max-width: 600px;
             margin: 120px auto 40px;
@@ -159,7 +153,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
         }
 
         .form-subtitle {
@@ -180,7 +173,7 @@
             font-weight: 800;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6), 0 0 50px rgba(0, 168, 255, 0.3);
+            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6);
             cursor: pointer;
             border: none;
             margin-bottom: 25px;
@@ -188,7 +181,7 @@
 
         .register-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 40px rgba(0, 168, 255, 0.8), 0 0 80px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 0 40px rgba(0, 168, 255, 0.8);
         }
 
         .note {
@@ -199,7 +192,6 @@
             color: #d0d8e0;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 30px;
@@ -212,21 +204,14 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
             .top-bar { padding: 0 15px; height: 65px; }
             .logo { font-size: 18px; }
             .return-btn { padding: 6px 12px; font-size: 11px; }
-            .return-btn span .long-text { display: none; }
             .form-section { padding: 30px 20px; margin: 100px 15px 40px; }
             .form-title { font-size: 26px; }
             .register-btn { padding: 16px 35px; font-size: 16px; }
@@ -240,7 +225,6 @@
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
     <div class="top-bar">
         <div class="logo"><span>🔗</span> TaskLink</div>
         <div class="top-bar-right">
@@ -255,7 +239,6 @@
         </div>
     </div>
 
-    <!-- Form Section -->
     <section class="form-section">
         <h2 class="form-title en-only">Join Now as Early Professional</h2>
         <h2 class="form-title ar-only">انضم الآن كأول مهني</h2>
@@ -282,13 +265,17 @@
         </p>
     </section>
 
-    <!-- Footer -->
     <div class="footer">
         <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
         <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('tasklink_lang') || 'en';
+            switchLang(savedLang);
+        });
+
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');
@@ -304,6 +291,8 @@
                 buttons[0].classList.add('active');
                 buttons[1].classList.remove('active');
             }
+
+            localStorage.setItem('tasklink_lang', lang);
         }
     </script>
 </body>

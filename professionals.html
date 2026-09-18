@@ -45,7 +45,6 @@
             z-index: -1;
         }
 
-        /* ===== TOP BAR ===== */
         .top-bar {
             position: fixed;
             top: 0;
@@ -66,13 +65,11 @@
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
             color: #ffffff;
         }
 
-        .logo span {
-            color: #00a8ff;
-        }
+        .logo span { color: #00a8ff; }
 
         .top-bar-right {
             display: flex;
@@ -135,7 +132,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== PROFESSIONALS SECTION ===== */
         .professionals-section {
             max-width: 1100px;
             margin: 120px auto 40px;
@@ -151,7 +147,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
             animation: fadeInUp 0.8s ease;
         }
 
@@ -164,7 +159,6 @@
             animation: fadeInUp 1s ease;
         }
 
-        /* ===== EMPTY STATE ===== */
         .empty-state {
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(15px);
@@ -199,7 +193,6 @@
             color: #d0d8e0;
         }
 
-        /* ===== REGISTER BUTTON ===== */
         .register-btn {
             display: inline-block;
             background: linear-gradient(45deg, #00a8ff, #00d2ff);
@@ -210,17 +203,16 @@
             font-weight: 800;
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6), 0 0 50px rgba(0, 168, 255, 0.3);
+            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6);
             cursor: pointer;
             border: none;
         }
 
         .register-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 40px rgba(0, 168, 255, 0.8), 0 0 80px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 0 40px rgba(0, 168, 255, 0.8);
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 30px;
@@ -305,6 +297,11 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('tasklink_lang') || 'en';
+            switchLang(savedLang);
+        });
+
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');
@@ -320,6 +317,8 @@
                 buttons[0].classList.add('active');
                 buttons[1].classList.remove('active');
             }
+
+            localStorage.setItem('tasklink_lang', lang);
         }
     </script>
 </body>

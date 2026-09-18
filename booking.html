@@ -45,7 +45,6 @@
             z-index: -1;
         }
 
-        /* ===== TOP BAR ===== */
         .top-bar {
             position: fixed;
             top: 0;
@@ -66,13 +65,11 @@
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
             color: #ffffff;
         }
 
-        .logo span {
-            color: #00a8ff;
-        }
+        .logo span { color: #00a8ff; }
 
         .top-bar-right {
             display: flex;
@@ -135,7 +132,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== PROFESSIONS SECTION ===== */
         .professions-section {
             max-width: 1100px;
             margin: 120px auto 40px;
@@ -151,7 +147,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 0 30px rgba(0, 168, 255, 0.3);
             animation: fadeInUp 0.8s ease;
         }
 
@@ -227,7 +222,6 @@
             color: #d0d8e0;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 30px;
@@ -342,6 +336,11 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('tasklink_lang') || 'en';
+            switchLang(savedLang);
+        });
+
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');
@@ -357,6 +356,8 @@
                 buttons[0].classList.add('active');
                 buttons[1].classList.remove('active');
             }
+
+            localStorage.setItem('tasklink_lang', lang);
         }
 
         function goToProfessionals(profession) {

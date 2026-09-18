@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskLink - Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #0a0e1a;
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 14, 26, 0.85) 0%, rgba(15, 32, 39, 0.85) 50%, rgba(44, 83, 100, 0.85) 100%);
+            z-index: -1;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 2000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
+            color: #ffffff;
+        }
+
+        .logo span { color: #00a8ff; }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1.5px solid rgba(0, 168, 255, 0.5);
+            color: #00d2ff;
+            padding: 8px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .return-btn:hover {
+            background: rgba(0, 168, 255, 0.15);
+            border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 168, 255, 0.5);
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .examples-section {
+            max-width: 1200px;
+            margin: 120px auto 40px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .examples-title {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .examples-subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 50px;
+            color: #d0d8e0;
+            animation: fadeInUp 1s ease;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .example-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            padding: 30px 25px;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 168, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .example-card:hover::before {
+            left: 100%;
+        }
+
+        .example-card:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 168, 255, 0.12);
+            border-color: #00a8ff;
+            box-shadow: 0 15px 40px rgba(0, 168, 255, 0.4);
+        }
+
+        .example-avatar {
+            font-size: 60px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(0, 168, 255, 0.5));
+        }
+
+        .example-name {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #00d2ff;
+            text-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .example-location {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-bottom: 15px;
+            color: #d0d8e0;
+        }
+
+        .example-services {
+            font-size: 13px;
+            opacity: 0.85;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            color: #d0d8e0;
+        }
+
+        .book-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
+            color: #ffffff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+            cursor: pointer;
+            border: none;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.8);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px 30px 0 0;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 80px;
+            color: #d0d8e0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar { padding: 0 15px; height: 65px; }
+            .logo { font-size: 18px; }
+            .return-btn { padding: 6px 12px; font-size: 11px; }
+            .examples-title { font-size: 28px; }
+            .examples-grid { grid-template-columns: 1fr; }
+        }
+
+        .ar-only { display: none; }
+        .en-only { display: block; }
+        html[lang="ar"] .ar-only { display: block; }
+        html[lang="ar"] .en-only { display: none; }
+        html[lang="ar"] { direction: rtl; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo"><span>🔗</span> TaskLink</div>
+        <div class="top-bar-right">
+            <a href="index.html" class="return-btn">
+                <span class="en-only">← Back</span>
+                <span class="ar-only">→ رجوع</span>
+            </a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="switchLang('en')">English</button>
+                <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="examples-section">
+        <h2 class="examples-title en-only">Our Professionals</h2>
+        <h2 class="examples-title ar-only">مهنيونا حول العالم</h2>
+
+        <p class="examples-subtitle en-only">
+            Discover talented professionals from around the world
+        </p>
+        <p class="examples-subtitle ar-only">
+            اكتشف مهنيين موهوبين من جميع أنحاء العالم
+        </p>
+
+        <div class="examples-grid">
+            <!-- Sports Coach -->
+            <div class="example-card">
+                <div class="example-avatar">👨‍🏫</div>
+                <h3 class="example-name en-only">Coach Mohammed</h3>
+                <h3 class="example-name ar-only">كوتش محمد</h3>
+                <p class="example-location en-only">📍 New York, USA</p>
+                <p class="example-location ar-only">📍 نيويورك، أمريكا</p>
+                <div class="example-services en-only">
+                    🏋️ Personal Training<br>
+                    💪 Fitness Coaching<br>
+                    🥗 Nutrition Plans
+                </div>
+                <div class="example-services ar-only">
+                    🏋️ تدريب شخصي<br>
+                    💪 تدريب لياقة<br>
+                    🥗 خطط غذائية
+                </div>
+                <a href="book.html?professional=coach_mohammed" class="book-btn">
+                    <span class="en-only">Book Now</span>
+                    <span class="ar-only">احجز الآن</span>
+                </a>
+            </div>
+
+            <!-- Hairdresser -->
+            <div class="example-card">
+                <div class="example-avatar">💇</div>
+                <h3 class="example-name en-only">Sofia Laurent</h3>
+                <h3 class="example-name ar-only">صوفيا لوران</h3>
+                <p class="example-location en-only">📍 Paris, France</p>
+                <p class="example-location ar-only">📍 باريس، فرنسا</p>
+                <div class="example-services en-only">
+                    ✂️ Haircut & Styling<br>
+                    🎨 Hair Coloring<br>
+                    💆 Hair Treatment
+                </div>
+                <div class="example-services ar-only">
+                    ✂️ قص وتصفيف<br>
+                    🎨 صبغ الشعر<br>
+                    💆 علاج الشعر
+                </div>
+                <a href="book.html?professional=sofia_laurent" class="book-btn">
+                    <span class="en-only">Book Now</span>
+                    <span class="ar-only">احجز الآن</span>
+                </a>
+            </div>
+
+            <!-- Dentist -->
+            <div class="example-card">
+                <div class="example-avatar">🦷</div>
+                <h3 class="example-name en-only">Dr. James Smith</h3>
+                <h3 class="example-name ar-only">د. جيمس سميث</h3>
+                <p class="example-location en-only">📍 London, UK</p>
+                <p class="example-location ar-only">📍 لندن، بريطانيا</p>
+                <div class="example-services en-only">
+                    🦷 Dental Check-ups<br>
+                    🪥 Teeth Cleaning<br>
+                    😁 Cosmetic Dentistry
+                </div>
+                <div class="example-services ar-only">
+                    🦷 فحوصات الأسنان<br>
+                    🪥 تنظيف الأسنان<br>
+                    😁 تجميل الأسنان
+                </div>
+                <a href="book.html?professional=dr_james" class="book-btn">
+                    <span class="en-only">Book Now</span>
+                    <span class="ar-only">احجز الآن</span>
+                </a>
+            </div>
+
+            <!-- Private Tutor -->
+            <div class="example-card">
+                <div class="example-avatar">📚</div>
+                <h3 class="example-name en-only">Anna Müller</h3>
+                <h3 class="example-name ar-only">آنا مولر</h3>
+                <p class="example-location en-only">📍 Berlin, Germany</p>
+                <p class="example-location ar-only">📍 برلين، ألمانيا</p>
+                <div class="example-services en-only">
+                    📐 Math & Physics<br>
+                    📝 Exam Preparation<br>
+                    🎓 University Tutoring
+                </div>
+                <div class="example-services ar-only">
+                    📐 رياضيات وفيزياء<br>
+                    📝 تحضير للامتحانات<br>
+                    🎓 دروس جامعية
+                </div>
+                <a href="book.html?professional=anna_muller" class="book-btn">
+                    <span class="en-only">Book Now</span>
+                    <span class="ar-only">احجز الآن</span>
+                </a>
+            </div>
+
+            <!-- Photographer -->
+            <div class="example-card">
+                <div class="example-avatar">📸</div>
+                <h3 class="example-name en-only">Michael Chen</h3>
+                <h3 class="example-name ar-only">مايكل تشين</h3>
+                <p class="example-location en-only">📍 Toronto, Canada</p>
+                <p class="example-location ar-only">📍 تورونتو، كندا</p>
+                <div class="example-services en-only">
+                    💍 Wedding Photography<br>
+                    🎉 Event Photography<br>
+                    👤 Portrait Sessions
+                </div>
+                <div class="example-services ar-only">
+                    💍 تصوير الأعراس<br>
+                    🎉 تصوير المناسبات<br>
+                    👤 جلسات بورتريه
+                </div>
+                <a href="book.html?professional=michael_chen" class="book-btn">
+                    <span class="en-only">Book Now</span>
+                    <span class="ar-only">احجز الآن</span>
+                </a>
+            </div>
+
+            <!-- Fitness Trainer -->
+            <div class="example-card">
+                <div class="example-avatar">💪</div>
+                <h3 class="example-name en-only">Layla Al-Rashid</h3>
+                <h3 class="example-name ar-only">ليلى الراشد</h3>
+                <p class="example-location en-only">📍 Dubai, UAE</p>
+                <p class="example-location ar-only">📍 دبي، الإمارات</p>
+                <div class="example-services en-only">
+                    🏋️ Weight Training<br>
+                    🏃 Cardio Programs<br>
+                    🧘 Yoga Sessions
+                </div>
+                <div class="example-services ar-only">
+                    🏋️ تدريب الأثقال<br>
+                    🏃 برامج الكارديو<br>
+                    🧘 جلسات اليوغا
+                </div>
+                <a href="book.html?professional=layla_rashid" class="book-btn">
+                    <span class="en-only">Book Now</span>
+                    <span class="ar-only">احجز الآن</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
+        <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('tasklink_lang') || 'en';
+            switchLang(savedLang);
+        });
+
+        function switchLang(lang) {
+            const html = document.documentElement;
+            const buttons = document.querySelectorAll('.lang-btn');
+
+            if (lang === 'ar') {
+                html.lang = 'ar';
+                html.dir = 'rtl';
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            } else {
+                html.lang = 'en';
+                html.dir = 'ltr';
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            }
+
+            localStorage.setItem('tasklink_lang', lang);
+        }
+    </script>
+</body>
+  </html>

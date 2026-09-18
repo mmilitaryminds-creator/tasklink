@@ -13,22 +13,47 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            background: #0a0e1a;
             min-height: 100vh;
             color: #ffffff;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* ===== TOP BAR ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 14, 26, 0.85) 0%, rgba(15, 32, 39, 0.85) 50%, rgba(44, 83, 100, 0.85) 100%);
+            z-index: -1;
+        }
+
         .top-bar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             height: 70px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -36,23 +61,53 @@
             z-index: 2000;
         }
 
-        /* ===== LOGO ===== */
         .logo {
             font-size: 24px;
             font-weight: 900;
             letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6), 0 0 40px rgba(0, 168, 255, 0.3);
+            text-shadow: 0 0 20px rgba(0, 168, 255, 0.6);
+            color: #ffffff;
         }
 
-        .logo span {
-            color: #00a8ff;
+        .logo span { color: #00a8ff; }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        /* ===== LANGUAGE SWITCHER ===== */
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1.5px solid rgba(0, 168, 255, 0.5);
+            color: #00d2ff;
+            padding: 8px 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .return-btn:hover {
+            background: rgba(0, 168, 255, 0.15);
+            border-color: #00d2ff;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
         .lang-switch {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .lang-btn {
@@ -60,88 +115,50 @@
             border: none;
             color: #ffffff;
             cursor: pointer;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .lang-btn.active {
-            background: #00a8ff;
+            background: linear-gradient(45deg, #00a8ff, #00d2ff);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 2px 10px rgba(0, 168, 255, 0.5);
         }
 
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ===== RETURN BUTTON ===== */
-        .return-btn {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 50px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .return-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* ===== BOOKING SECTION ===== */
         .booking-section {
-            max-width: 700px;
+            max-width: 650px;
             margin: 120px auto 40px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(15px);
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(0, 168, 255, 0.2);
             text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 0.8s ease;
         }
 
         .booking-title {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 168, 255, 0.5);
+            font-size: 34px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, #00d2ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .booking-subtitle {
             font-size: 16px;
             opacity: 0.9;
-            line-height: 1.6;
-            margin-bottom: 30px;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            color: #d0d8e0;
         }
 
-        /* ===== PROFESSIONAL INFO ===== */
-        .professional-info {
-            background: rgba(0, 168, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(0, 168, 255, 0.3);
-        }
-
-        .professional-info h3 {
-            font-size: 22px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .professional-info p {
-            font-size: 14px;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        /* ===== FORM FIELDS ===== */
         .form-group {
             margin-bottom: 20px;
             text-align: left;
@@ -150,42 +167,44 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
+            color: #00d2ff;
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 15px;
+            padding: 14px 18px;
             border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(0, 168, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
-            font-size: 16px;
+            font-size: 15px;
             transition: all 0.3s ease;
+            font-family: inherit;
         }
 
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
-            border-color: #00a8ff;
+            border-color: #00d2ff;
             outline: none;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 168, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.3);
         }
 
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 90px;
         }
 
-        /* ===== SERVICE TYPE ===== */
         .service-type {
             display: flex;
             gap: 15px;
@@ -194,163 +213,118 @@
 
         .service-option {
             flex: 1;
-            padding: 15px;
+            padding: 18px 15px;
             border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(0, 168, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .service-option:hover {
-            border-color: #00a8ff;
-            background: rgba(255, 255, 255, 0.2);
+            border-color: #00d2ff;
+            background: rgba(0, 168, 255, 0.1);
         }
 
         .service-option.active {
-            border-color: #00a8ff;
-            background: rgba(0, 168, 255, 0.3);
+            border-color: #00d2ff;
+            background: rgba(0, 168, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.4);
         }
 
         .service-option-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
+            font-size: 28px;
+            margin-bottom: 8px;
         }
 
         .service-option-label {
             font-size: 14px;
             font-weight: 700;
+            color: #ffffff;
         }
 
-        /* ===== SUBMIT BUTTON ===== */
         .submit-btn {
             width: 100%;
             background: linear-gradient(45deg, #00a8ff, #00d2ff);
             color: #ffffff;
-            padding: 20px;
+            padding: 18px;
             border: none;
             border-radius: 50px;
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 168, 255, 0.5), 0 0 40px rgba(0, 168, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 168, 255, 0.6), 0 0 50px rgba(0, 168, 255, 0.3);
+            margin-top: 10px;
         }
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(0, 168, 255, 0.7), 0 0 60px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 0 40px rgba(0, 168, 255, 0.8), 0 0 80px rgba(0, 168, 255, 0.4);
         }
 
-        /* ===== SUCCESS MESSAGE ===== */
         .success-message {
             display: none;
-            background: rgba(46, 213, 115, 0.9);
+            background: rgba(46, 213, 115, 0.2);
+            border: 1.5px solid rgba(46, 213, 115, 0.6);
             padding: 20px;
             border-radius: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
+            color: #2ed573;
             animation: fadeInUp 0.5s ease;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border-radius: 30px 30px 0 0;
             font-size: 14px;
             opacity: 0.8;
             margin-top: 60px;
+            color: #d0d8e0;
         }
 
-        /* ===== ANIMATIONS ===== */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== MOBILE ===== */
         @media (max-width: 768px) {
-            .booking-section {
-                padding: 20px;
-                margin: 100px 20px 40px;
-            }
-
-            .booking-title {
-                font-size: 24px;
-            }
-
-            .service-type {
-                flex-direction: column;
-            }
-
-            .top-bar {
-                padding: 0 15px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
+            .top-bar { padding: 0 15px; height: 65px; }
+            .logo { font-size: 18px; }
+            .return-btn { padding: 6px 12px; font-size: 11px; }
+            .booking-section { padding: 30px 20px; margin: 100px 15px 40px; }
+            .booking-title { font-size: 26px; }
+            .service-type { flex-direction: column; }
         }
 
-        /* ===== LANGUAGE SWITCHING ===== */
-        .ar-only {
-            display: none;
-        }
-
-        .en-only {
-            display: block;
-        }
-
-        html[lang="ar"] .ar-only {
-            display: block;
-        }
-
-        html[lang="ar"] .en-only {
-            display: none;
-        }
-
-        html[lang="ar"] {
-            direction: rtl;
-        }
-
-        html[lang="ar"] .return-btn {
-            direction: ltr;
-        }
+        .ar-only { display: none; }
+        .en-only { display: block; }
+        html[lang="ar"] .ar-only { display: block; }
+        html[lang="ar"] .en-only { display: none; }
+        html[lang="ar"] { direction: rtl; }
     </style>
 </head>
 <body>
-    <!-- Top Bar -->
     <div class="top-bar">
-        <!-- Logo -->
-        <div class="logo">
-            <span>🔗</span> TaskLink
-        </div>
-
-        <!-- Return Button -->
-        <a href="professionals.html" class="return-btn">
-            <span class="en-only">← Back to Professionals</span>
-            <span class="ar-only">→ العودة للمهنيين</span>
-        </a>
-
-        <!-- Language Switcher -->
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="switchLang('en')">English</button>
-            <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+        <div class="logo"><span>🔗</span> TaskLink</div>
+        <div class="top-bar-right">
+            <a href="professionals.html" class="return-btn">
+                <span class="en-only">← Back</span>
+                <span class="ar-only">→ رجوع</span>
+            </a>
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="switchLang('en')">English</button>
+                <button class="lang-btn" onclick="switchLang('ar')">العربية</button>
+            </div>
         </div>
     </div>
 
-    <!-- Booking Section -->
     <section class="booking-section">
         <h2 class="booking-title en-only">Book Your Appointment</h2>
         <h2 class="booking-title ar-only">احجز موعدك</h2>
@@ -361,12 +335,6 @@
         <p class="booking-subtitle ar-only">
             املأ معلوماتك أدناه وسيؤكد المهني حجزك
         </p>
-
-        <!-- Professional Info -->
-        <div class="professional-info">
-            <h3 id="professionalName">Professional Name</h3>
-            <p id="professionalDetails">Profession • City • Country</p>
-        </div>
 
         <form onsubmit="submitForm(event)">
             <div class="form-group">
@@ -425,20 +393,18 @@
             </button>
         </form>
 
-        <!-- Success Message -->
         <div class="success-message" id="successMessage">
             <p class="en-only">🎉 Booking Confirmed! The professional will contact you soon</p>
             <p class="ar-only">🎉 تم تأكيد الحجز! سيتواصل معك المهني قريباً</p>
         </div>
     </section>
 
-    <!-- Footer -->
     <div class="footer">
         <p class="en-only">© 2026 TaskLink - All Rights Reserved</p>
         <p class="ar-only">© 2026 TaskLink - جميع الحقوق محفوظة</p>
     </div>
-        <script>
-        // ===== LANGUAGE SWITCHING =====
+
+    <script>
         function switchLang(lang) {
             const html = document.documentElement;
             const buttons = document.querySelectorAll('.lang-btn');
@@ -456,11 +422,9 @@
             }
         }
 
-        // ===== SERVICE TYPE SELECTION =====
         function selectService(type) {
             const options = document.querySelectorAll('.service-option');
             options.forEach(option => option.classList.remove('active'));
-            
             if (type === 'online') {
                 options[0].classList.add('active');
             } else {
@@ -468,33 +432,11 @@
             }
         }
 
-        // ===== FORM SUBMISSION =====
         function submitForm(event) {
             event.preventDefault();
-
-            const lang = document.documentElement.lang;
-            const clientName = document.getElementById(lang === 'ar' ? 'clientName_ar' : 'clientName').value;
-            const clientPhone = document.getElementById(lang === 'ar' ? 'clientPhone_ar' : 'clientPhone').value;
-            const serviceType = document.querySelector('.service-option.active .service-option-label').textContent;
-            const date = document.getElementById('appointmentDate').value;
-            const time = document.getElementById('appointmentTime').value;
-            const notes = document.getElementById(lang === 'ar' ? 'notes_ar' : 'notes').value;
-
-            // Show success message
             const successMessage = document.getElementById('successMessage');
             successMessage.style.display = 'block';
 
-            // Prepare email to professional
-            const professionalEmail = 'professionals-email@example.com'; // TODO: Replace with actual professional email
-            const subject = lang === 'ar' ? 'حجز جديد - TaskLink' : 'New Booking - TaskLink';
-            const body = lang === 'ar'
-                ? `معلومات الحجز:\n\nاسم الزبون: ${clientName}\nهاتف الزبون: ${clientPhone}\nنوع الخدمة: ${serviceType}\nالتاريخ: ${date}\nالوقت: ${time}\nملاحظات: ${notes}`
-                : `Booking Information:\n\nClient Name: ${clientName}\nClient Phone: ${clientPhone}\nService Type: ${serviceType}\nDate: ${date}\nTime: ${time}\nNotes: ${notes}`;
-
-            // Open email client (mailto)
-            window.location.href = `mailto:${professionalEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-            // Reset form after 3 seconds
             setTimeout(() => {
                 document.getElementById('clientName').value = '';
                 document.getElementById('clientName_ar').value = '';
@@ -504,7 +446,8 @@
                 document.getElementById('appointmentTime').value = '';
                 document.getElementById('notes').value = '';
                 document.getElementById('notes_ar').value = '';
-            }, 3000);
+                successMessage.style.display = 'none';
+            }, 4000);
         }
     </script>
 </body>
